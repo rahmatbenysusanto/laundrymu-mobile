@@ -33,6 +33,18 @@ class AuthController extends Controller
             Session::put("data_user", $hit->data);
             Session::put("token", $hit->data->token);
 
+            // Get Toko
+            if ($hit->data->role == "owner") {
+                $toko = $this->hitApiService->GET('api/toko/user/'.$hit->data->id, []);
+                Session::put('toko', $toko->data[0]);
+                if ($hit->data->status != "active") {
+                    return redirect()->to(route('verifikasiOtp'));
+                }
+            } else {
+                $toko = $this->hitApiService->GET('api/toko/pegawai/'.$hit->data->id, []);
+                Session::put('toko', $toko->data->toko);
+            }
+
             return redirect()->action([DashboardController::class, 'index']);
         } else {
             Session::flash("error", "Login gagal, email atau password salah!");
@@ -50,17 +62,41 @@ class AuthController extends Controller
         dd($request);
     }
 
-    public function generateNewToken(Request $request): \Illuminate\Http\JsonResponse
+    public function generateNewToken(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
     {
-        $userId = base64_decode($request->checkLoginId);
-        $hit = $this->hitApiService->GETNOTLOGIN('api/user/generate-new-token/'.$userId, []);
+        try {
+            $userId = base64_decode($request->checkLoginId);
+            $hit = $this->hitApiService->GETNOTLOGIN('api/user/generate-new-token/'.$userId, []);
 
-        Session::put("data_user", $hit->data);
-        Session::put("token", base64_decode($request->checkLogin));
+            Session::put("data_user", $hit->data);
+            Session::put("token", base64_decode($request->checkLogin));
 
-        return response()->json([
-            'status'    => true,
-            'message'   => 'GET Data Berhasil',
-        ]);
+            // Get Toko
+            if ($hit->data->role == "owner") {
+                $toko = $this->hitApiService->GET('api/toko/user/'.$hit->data->id, []);
+                Session::put('toko', $toko->data[0]);
+                if ($hit->data->status != "active") {
+                    return redirect()->to(route('verifikasiOtp'));
+                }
+            } else {
+                $toko = $this->hitApiService->GET('api/toko/pegawai/'.$hit->data->id, []);
+                Session::put('toko', $toko->data->toko);
+            }
+
+            return response()->json([
+                'status'    => true,
+                'message'   => 'GET Data Berhasil',
+            ]);
+        } catch (\Exception $err) {
+            return redirect()->to(route('login'));
+        }
+    }
+
+    public function logout(): \Illuminate\Http\RedirectResponse
+    {
+        Session::forget('data_user');
+        Session::forget('toko');
+
+        return redirect()->to(route('login'));
     }
 }

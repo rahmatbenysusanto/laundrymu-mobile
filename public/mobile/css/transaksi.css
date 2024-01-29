@@ -1,0 +1,298 @@
+.title-page {
+    color: #262626;
+    font-family: Gantari, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.34px;
+}
+
+#list-transaksi-header {
+    background: #FFFFFF;
+}
+
+.button-filter {
+    border-radius: 8px;
+    border: 1px solid #C2C2C2;
+    padding: 4px 8px;
+}
+
+.text-filter {
+    color: #616161;
+    font-family: Gantari, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.084px;
+}
+
+#list-transaksi-none {
+    padding-top: 50%;
+}
+
+#list-transaksi-none p {
+    color: #616161;
+    text-align: center;
+    font-family: Gantari, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.084px;
+    max-width: 270px;
+}
+
+.card-transaksi {
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.card-header-transaksi {
+    border-radius: 4px;
+    border-left: 2px solid #616161;
+    background: #F5F5F5;
+    display: flex;
+    padding: 8px;
+    align-items: center;
+    gap: 106px;
+    align-self: stretch;
+    justify-content: space-between;
+}
+
+.status-transaksi {
+    color: #262626;
+    font-family: Gantari, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -0.084px;
+    margin-bottom: 4px;
+}
+
+.text-transaksi {
+    color: #616161;
+    font-family: Gantari, sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 0;
+    margin-bottom: 0;
+}
+
+.status-pembayaran-danger {
+    display: flex;
+    width: 74px;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+    background: #FCB7B7;
+    color: #A60606;
+    text-align: center;
+    font-family: Gantari, sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 12px;
+    letter-spacing: 0;
+}
+
+.status-pembayaran-success {
+    display: flex;
+    width: 74px;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+    background: #A3F3AC;
+    color: #094510;
+    text-align: center;
+    font-family: Gantari, sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 12px;
+    letter-spacing: 0;
+}
+
+.card-center-header {
+    padding-top: 16px;
+}
+
+.jenis-layanan {
+    color: #262626;
+    font-family: Gantari, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.084px;
+    margin-bottom: 4px;
+}
+
+.keterangan-layanan {
+    color: #616161;
+    font-family: Gantari, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    margin-bottom: 0;
+}
+
+.jenis-pembayaran {
+    color: #616161;
+    text-align: right;
+    font-family: Gantari, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.084px;
+    margin-bottom: 0;
+    padding-left: 4px;
+}
+
+.card-bottom-transaksi {
+    padding-top: 16px;
+}
+
+.btn-putih {
+    display: flex;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;
+    border-radius: 6px;
+    border: 1px solid #00A3FF;
+    color: #00A3FF;
+    text-align: center;
+    font-family: Gantari, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -0.084px;
+}
+
+.btn-blue {
+    display: flex;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;
+    border-radius: 6px;
+    background: #00A3FF;
+    color: #FFF;
+    text-align: center;
+    font-family: Gantari, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -0.084px;
+}
+
+.btn-icon {
+    display: flex;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(67, 67, 67, 0.24);
+    background: #FFF;
+}
+
+.menu-title {
+    color: #616161;
+    text-align: center;
+    font-family: Gantari, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.084px;
+}
+
+.minimal-tab .btn.active {
+    border-bottom-color: #00A3FF;
+    color: #00A3FF;
+}
+
+.footer-nav.footer-style-two li.active a::before {
+    border-radius: 50%;
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    right: 10%;
+    z-index: -10;
+    background-color: #00A3FF;
+    content: "";
+}
+
+.modal-title {
+    color: rgba(67, 67, 67, 0.96);
+    font-family: Gantari, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -0.176px;
+}
+
+.menu-modal {
+    color: rgba(67, 67, 67, 0.96);
+    font-family: Gantari, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -0.084px;
+}
+
+.menu-modal-danger {
+    color: #F83535;
+    font-family: Gantari, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -0.084px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
