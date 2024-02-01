@@ -109,7 +109,7 @@
 
     <div class="card-white mt-3 pt-3 pb-3">
         <div class="container">
-            <div class="title-page">Detail Layanan</div>
+            <div class="title-page-detail">Detail Layanan</div>
             <div class="card-layanan">
                 @foreach($detail as $det)
                     <div class="d-flex justify-content-between pb-2">
@@ -125,6 +125,49 @@
                         <p class="text-reguler">Biaya</p>
                         <p class="text-bold">Rp.{{ number_format($transaksi->total_harga) }}</p>
                     </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-white mt-3 pt-3 pb-3">
+        <div class="container">
+            <div class="title-page-detail">Informasi Pengiriman</div>
+            <div>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="text-reguler">Tipe Pengiriman</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="text-reguler-bold text-start">{{ $transaksi->pengiriman->nama }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-white mt-3 pt-3 pb-3">
+        <div class="container">
+            <div class="title-page-detail">Rincian Pembayaran</div>
+            <div class="d-flex justify-content-between pt-2">
+                <p class="text-reguler">Biaya ({{ count($detail) }} layanan)</p>
+                <a class="text-reguler-bold">Rp.{{ number_format($transaksi->harga) }}</a>
+            </div>
+            <div class="d-flex justify-content-between pt-2">
+                <p class="text-reguler">Parfum</p>
+                <a class="text-reguler-bold">Rp.{{ number_format($detail[0]->parfum->harga) }}</a>
+            </div>
+            <div class="d-flex justify-content-between pt-2">
+                <p class="text-reguler">Biaya Pengiriman</p>
+                <a class="text-reguler-bold">Rp.{{ number_format($transaksi->pengiriman->harga) }}</a>
+            </div>
+            <div class="d-flex justify-content-between pt-2">
+                <p class="text-reguler">Diskon</p>
+                <a class="text-reguler-bold">Rp.{{ number_format($transaksi->harga_diskon) }}</a>
+            </div>
+            <div class="pt-2 pb-2" style="border-bottom: 1px solid #C2C2C2;"></div>
+            <div class="d-flex justify-content-between pt-2">
+                <span class="title-page" style="font-weight: 600;">Total Harga</span>
+                <span class="title-page" style="font-weight: 600;">Rp.{{ number_format($transaksi->total_harga) }}</span>
             </div>
         </div>
     </div>

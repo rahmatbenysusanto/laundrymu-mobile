@@ -49,7 +49,7 @@
                     <path d="M6.48686 14.0001L13.7441 21.2556C13.9084 21.4199 14.0007 21.6428 14.0007 21.8751C14.0007 22.1075 13.9084 22.3303 13.7441 22.4946C13.5798 22.6589 13.357 22.7512 13.1246 22.7512C12.8923 22.7512 12.6694 22.6589 12.5051 22.4946L4.63011 14.6196C4.54863 14.5383 4.48398 14.4418 4.43986 14.3355C4.39575 14.2292 4.37305 14.1152 4.37305 14.0001C4.37305 13.885 4.39575 13.7711 4.43986 13.6648C4.48398 13.5585 4.54863 13.4619 4.63011 13.3806L12.5051 5.50563C12.6694 5.34133 12.8923 5.24902 13.1246 5.24902C13.357 5.24902 13.5798 5.34133 13.7441 5.50563C13.9084 5.66993 14.0007 5.89277 14.0007 6.12513C14.0007 6.35749 13.9084 6.58033 13.7441 6.74463L6.48686 14.0001Z" fill="#262626"/>
                 </svg>
             </a>
-            <div class="logo-wrapper"><a href="#" class="title-page">Edit Layanan</a></div>
+            <div class="logo-wrapper"><a href="#" class="title-page">Edit Parfum</a></div>
             <div>
             </div>
         </div>
@@ -62,24 +62,17 @@
         <div class="row">
             <div class="col-12">
                 <div class="card p-2">
-                    <form action="{{ route('prosesEditLayanan') }}" method="POST">
+                    <form action="{{ route('prosesEditParfum') }}" method="POST">
                         @csrf
-                        <input type="hidden" value="{{ $layanan->id }}" name="id">
+                        <input type="hidden" value="{{ $parfum->id }}" name="id">
                         <div class="form-group">
-                            <label class="form-label" for="nama">Nama Layanan</label>
-                            <input class="form-control" value="{{ $layanan->nama }}" id="nama" type="text" placeholder="Masukan nama layanan" name="nama" required>
+                            <label class="form-label" for="nama">Nama Parfum</label>
+                            <input class="form-control" value="{{ $parfum->nama }}" id="nama" type="text" placeholder="Masukan nama layanan" name="nama" required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="tipe">Tipe Layanan</label>
-                            <select class="form-select" id="tipe" name="type" required>
-                                <option value="berat" {{ $layanan->type == "berat" ? "selected" : "" }}>Berat</option>
-                                <option value="satuan" {{ $layanan->type == "satuan" ? "selected" : "" }}>Satuan</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="harga">Harga Layanan</label>
+                            <label class="form-label" for="harga">Harga Parfum</label>
                             <div class="input-group mb-3"><span class="input-group-text" id="basic-addon1">Rp</span>
-                                <input class="form-control" value="{{ $layanan->harga }}" type="number" name="harga" id="harga" required>
+                                <input class="form-control" value="{{ $parfum->harga }}" type="number" name="harga" id="harga" required>
                             </div>
                         </div>
                         <button class="btn btn-primary w-100 d-flex align-items-center justify-content-center" type="submit">Simpan</button>

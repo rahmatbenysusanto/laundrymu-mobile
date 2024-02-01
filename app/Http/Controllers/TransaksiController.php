@@ -26,7 +26,6 @@ class TransaksiController extends Controller
             $title = "list transaksi";
             return view('transaksi.detail', compact('title', 'transaksi', 'detail', 'histori'));
         } else {
-            Session::flash('error', 'Transaksi tidak ditemukan');
             return back();
         }
     }

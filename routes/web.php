@@ -61,4 +61,42 @@ Route::middleware([CekLogin::class])->group(function () {
         Route::post('/upload-bukti-pembayaran', 'uploadBuktiPembayaran')->name('uploadBuktiPembayaran');
         Route::post('/perpanjang-lisensi-proses', 'perpanjangLisensiProses')->name('perpanjangLisensiProses');
     });
+
+    Route::controller(\App\Http\Controllers\ParfumController::class)->group(function () {
+        Route::get('/parfum', 'index')->name('parfum');
+        Route::get('/tambah-parfum', 'tambah')->name('tambahParfum');
+        Route::post('/parfum', 'tambahParfumProses')->name('tambahParfumProses');
+        Route::get('/hapus-parfum', 'hapusParfum')->name('hapusParfum');
+        Route::get('/edit-parfum/{id}', 'editParfum');
+        Route::post('/edit-parfum', 'prosesEditParfum')->name('prosesEditParfum');
+    });
+
+    Route::controller(\App\Http\Controllers\PembayaranController::class)->group(function () {
+        Route::get('/pembayaran', 'index')->name('pembayaran');
+        Route::get('/tambah-pembayaran', 'tambah')->name('tambahPembayaran');
+        Route::post('/pembayaran', 'tambahPembayaranProses')->name('tambahPembayaranProses');
+        Route::get('/hapus-pembayaran', 'hapusPembayaran')->name('hapusPembayaran');
+        Route::get('/edit-pembayaran/{id}', 'editPembayaran');
+        Route::post('/edit-pembayaran', 'prosesEditPembayaran')->name('prosesEditPembayaran');
+    });
+
+    Route::controller(\App\Http\Controllers\PelangganController::class)->group(function () {
+        Route::get('/pelanggan', 'index')->name('pelanggan');
+        Route::get('/tambah-pelanggan', 'tambah')->name('tambahPelanggan');
+        Route::post('/pelanggan', 'tambahPelangganProses')->name('tambahPelangganProses');
+        Route::post('/tambah-pelanggan-ajax', 'tambahPelangganAjax')->name('tambahPelangganAjax');
+        Route::get('/get-pelanggan', 'getPelanggan')->name('getPelanggan');
+        Route::get('/hapus-pelanggan', 'hapusPelanggan')->name('hapusPelanggan');
+        Route::get('/edit-pelanggan/{id}', 'editPelanggan');
+        Route::post('/edit-pelanggan', 'prosesEditPelanggan')->name('prosesEditPelanggan');
+    });
+
+    Route::controller(\App\Http\Controllers\DiskonController::class)->group(function () {
+        Route::get('/diskon', 'index')->name('diskon');
+        Route::get('/tambah-diskon', 'tambah')->name('tambahDiskon');
+        Route::post('/diskon', 'tambahDiskonProses')->name('tambahDiskonProses');
+        Route::get('/hapus-diskon', 'hapusDiskon')->name('hapusDiskon');
+        Route::get('/edit-diskon/{id}', 'editDiskon');
+        Route::post('/edit-diskon', 'prosesEditDiskon')->name('prosesEditDiskon');
+    });
 });

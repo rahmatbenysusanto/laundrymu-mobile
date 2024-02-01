@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -64,7 +65,6 @@ class LayananController extends Controller
             $layanan = $result->data;
             return view('layanan.edit', compact('title', 'layanan'));
         } else {
-            Session::flash('error', 'Layanan tidak ditemukan');
             return back();
         }
     }
@@ -73,9 +73,9 @@ class LayananController extends Controller
     {
         $result = $this->hitApiService->PATCH('api/layanan/'.$request->post('id'), [
             'toko_id'   => Session::get('toko')->id,
-            'nama'      => $request->post('namaLayanan'),
-            'type'      => $request->post('tipeLayanan'),
-            'harga'     => $request->post('hargaLayanan'),
+            'nama'      => $request->post('nama'),
+            'type'      => $request->post('type'),
+            'harga'     => $request->post('harga'),
         ]);
 
         if (isset($result) && $result->status) {
