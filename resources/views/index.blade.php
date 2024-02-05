@@ -34,18 +34,17 @@
 <script>
     checkLogin();
     function checkLogin() {
-        let checkLogin = localStorage.getItem('hash');
         let checkLoginId = localStorage.getItem('dt');
 
-        if (checkLogin !== null && checkLoginId !== null) {
+        if (checkLoginId !== null) {
             $.ajax({
                 url: '{{ route('generateNewToken') }}',
                 method: 'GET',
                 data: {
-                    checkLogin: checkLogin,
                     checkLoginId: checkLoginId
                 },
                 success: function (params) {
+                    console.log(params)
                     if (params.status) {
                         window.location.href = '/dashboard';
                     }

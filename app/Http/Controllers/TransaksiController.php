@@ -43,4 +43,27 @@ class TransaksiController extends Controller
             ]);
         }
     }
+
+    public function listLayanan(): View
+    {
+        $dataLayanan = $this->hitApiService->GET('api/layanan/toko/'.Session::get('toko')->id, []);
+        $layanan = $dataLayanan->data ?? [];
+
+        return view('transaksi.list_layanan', compact('layanan'));
+    }
+
+    public function tambahTransaksi(): View
+    {
+        $dataParfum = $this->hitApiService->GET('api/parfum/toko/'.Session::get('toko')->id, []);
+        $dataDiskon = $this->hitApiService->GET('api/diskon/toko/'.Session::get('toko')->id, []);
+        $dataPembayaran = $this->hitApiService->GET('api/pembayaran/toko/'.Session::get('toko')->id, []);
+        $dataPengiriman = $this->hitApiService->GET('api/pengiriman/toko/'.Session::get('toko')->id, []);
+
+        $parfum = $dataParfum->data ?? [];
+        $diskon = $dataDiskon->data ?? [];
+        $pembayaran = $dataPembayaran->data ?? [];
+        $pengiriman = $dataPengiriman->data ?? [];
+
+        return view('transaksi.tambah_transaksi', compact('parfum', 'diskon', 'pembayaran', 'pengiriman'));
+    }
 }

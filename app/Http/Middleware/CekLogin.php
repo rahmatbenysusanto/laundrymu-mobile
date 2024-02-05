@@ -20,7 +20,7 @@ class CekLogin
         if (Session::get("token") !== null) {
             return $next($request);
         } else {
-            return redirect()->action([AuthController::class, 'generateNewToken']);
+            return redirect()->action([AuthController::class, 'index']);
         }
     }
 }

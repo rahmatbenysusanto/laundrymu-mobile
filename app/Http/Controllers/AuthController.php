@@ -4,15 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\hitApiService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    public function __construct(
-        protected hitApiService $hitApiService
-    ){}
-
     public function index(): View
     {
         return view('index');
@@ -67,19 +64,20 @@ class AuthController extends Controller
         try {
             $userId = base64_decode($request->checkLoginId);
             $hit = $this->hitApiService->GETNOTLOGIN('api/user/generate-new-token/'.$userId, []);
+            Log::info(json_encode($hit));
 
-            Session::put("data_user", $hit->data);
-            Session::put("token", base64_decode($request->checkLogin));
+            Session::put("data_user", $hit->data->user);
+            Session::put("token", $hit->data->token);
 
             // Get Toko
-            if ($hit->data->role == "owner") {
-                $toko = $this->hitApiService->GET('api/toko/user/'.$hit->data->id, []);
+            if ($hit->data->user->role == "owner") {
+                $toko = $this->hitApiService->GET('api/toko/user/'.$userId, []);
                 Session::put('toko', $toko->data[0]);
-                if ($hit->data->status != "active") {
+                if ($hit->data->user->status != "active") {
                     return redirect()->to(route('verifikasiOtp'));
                 }
             } else {
-                $toko = $this->hitApiService->GET('api/toko/pegawai/'.$hit->data->id, []);
+                $toko = $this->hitApiService->GET('api/toko/pegawai/'.$userId, []);
                 Session::put('toko', $toko->data->toko);
             }
 
@@ -88,7 +86,11 @@ class AuthController extends Controller
                 'message'   => 'GET Data Berhasil',
             ]);
         } catch (\Exception $err) {
-            return redirect()->to(route('login'));
+            return response()->json([
+                'status'    => false,
+                'message'   => 'GET Data Failed',
+                'error'     => $err->getMessage()
+            ]);
         }
     }
 

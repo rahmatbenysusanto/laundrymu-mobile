@@ -127,25 +127,25 @@
                 <div class="col-6">
                     <div class="card-ringkasan">
                         <p class="card-ringkasan-title">Laundry Baru</p>
-                        <p class="card-ringkasan-jumlah">0</p>
+                        <p class="card-ringkasan-jumlah">{{ $statusTransaksi->baru }}</p>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="card-ringkasan">
                         <p class="card-ringkasan-title">Laundry Diproses</p>
-                        <p class="card-ringkasan-jumlah">0</p>
+                        <p class="card-ringkasan-jumlah">{{ $statusTransaksi->diproses }}</p>
                     </div>
                 </div>
                 <div class="col-6 mt-3">
                     <div class="card-ringkasan">
                         <p class="card-ringkasan-title">Laundry Selesai</p>
-                        <p class="card-ringkasan-jumlah">0</p>
+                        <p class="card-ringkasan-jumlah">{{ $statusTransaksi->selesai }}</p>
                     </div>
                 </div>
                 <div class="col-6 mt-3">
                     <div class="card-ringkasan">
                         <p class="card-ringkasan-title">Laundry Diambil</p>
-                        <p class="card-ringkasan-jumlah">0</p>
+                        <p class="card-ringkasan-jumlah">{{ $statusTransaksi->baru }}</p>
                     </div>
                 </div>
             </div>
@@ -183,6 +183,10 @@
 @include('javascript')
 <script src="{{ asset('mobile/js/apexcharts.min.js') }}"></script>
 <script src="{{ asset('mobile/js/chart-active.js') }}"></script>
+
+<script>
+    localStorage.setItem('dt', JSON.stringify('{{ base64_encode(Session::get('data_user')->id) }}'))
+</script>
 
 </body>
 </html>

@@ -47,6 +47,8 @@ Route::middleware([CekLogin::class])->group(function () {
         Route::get('/transaksi', 'index')->name('transaksi');
         Route::get('/detail-transaksi/{orderNumber}', 'detail');
         Route::get('/proses-transaksi/{orderNumber}/{status}', 'prosesTransaksi')->name('prosesTransaksi');
+        Route::get('/transaksi-list-layanan', 'listLayanan')->name('transaksiListLayanan');
+        Route::get('/tambah-transaksi', 'tambahTransaksi')->name('tambahTransaksi');
     });
 
     Route::controller(\App\Http\Controllers\OutletController::class)->group(function () {
@@ -98,5 +100,14 @@ Route::middleware([CekLogin::class])->group(function () {
         Route::get('/hapus-diskon', 'hapusDiskon')->name('hapusDiskon');
         Route::get('/edit-diskon/{id}', 'editDiskon');
         Route::post('/edit-diskon', 'prosesEditDiskon')->name('prosesEditDiskon');
+    });
+
+    Route::controller(\App\Http\Controllers\PegawaiController::class)->group(function () {
+        Route::get('/pegawai', 'index')->name('pegawai');
+        Route::post('/tambah-pegawai', 'create')->name('tambahPegawai');
+        Route::get('/absensi-pegawai', 'absensiPegawai')->name('absensiPegawai');
+        Route::post('/create-absen-pegawai', 'createAbsenPegawai')->name('createAbsenPegawai');
+        Route::get('/gaji-pegawai', 'gajiPegawai')->name('gajiPegawai');
+        Route::get('/detail-absen-pegawai/{pegawaiId}', 'detailAbsenPegawai');
     });
 });
