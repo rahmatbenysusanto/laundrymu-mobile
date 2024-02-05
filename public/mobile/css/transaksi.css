@@ -326,6 +326,13 @@
     margin-bottom: 0;
 }
 
+.diskon-card {
+    border-radius: 8px;
+    border: 1px solid #C2C2C2;
+    padding: 16px;
+    gap: 33px;
+}
+
 
 
 
