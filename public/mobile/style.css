@@ -1230,7 +1230,7 @@ caption {
 
 .form-control:disabled,
 .form-control[readonly] {
-  background-color: #f1f2fb;
+  background-color: #e9ecef;
 }
 
 .bs-tooltip-auto[x-placement^=top] .tooltip-arrow::before,

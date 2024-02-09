@@ -113,3 +113,14 @@
     line-height: 20px!important;
     letter-spacing: -0.084px!important;
 }
+
+.text-bold-blue {
+    color: #00A3FF;
+    text-align: center;
+    font-family: Gantari, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.34px;
+}

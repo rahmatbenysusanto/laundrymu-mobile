@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('mobile/css/vanilla-dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('mobile/css/apexcharts.css') }}">
     <link rel="stylesheet" href="{{ asset('mobile/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('mobile/css/sweetalert.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,7 +73,7 @@
                         Laundry Diambil
                     @endif
                 </p>
-                <a class="text-blue">Lihat Detail</a>
+                <a href="/detail-status-transaksi/{{ $transaksi->order_number }}" class="text-blue">Lihat Detail</a>
             </div>
             <div class="d-flex justify-content-between">
                 <p class="text-reguler">{{ $transaksi->order_number }}</p>
@@ -104,6 +105,13 @@
                 <p class="text-reguler">Tanggal</p>
                 <a class="text-reguler-bold">{{ tanggal_jam_indo($transaksi->created_at) }}</a>
             </div>
+        </div>
+    </div>
+
+    <div class="card-white mt-3 pt-3 pb-3">
+        <div class="container">
+            <div class="title-page-detail">Catatan</div>
+            <p class="text-reguler">{{ $transaksi->catatan }}</p>
         </div>
     </div>
 
@@ -174,11 +182,101 @@
 
 </div>
 
-@include('menu')
+@if($transaksi->status == "diambil")
+    @include('menu')
+@else
+    <div class="footer-nav-area" id="footerNav">
+        <div class="container">
+            <div class="footer-nav position-relative shadow-sm footer-style-two">
+                <ul class="h-100 d-flex align-items-center justify-content-between ps-0">
+                    <li>
+                        <a onclick="prosesTransaksi('{{ $transaksi->order_number }}', '{{ $transaksi->status }}')" class="btn btn-lanjut">
+                            @if($transaksi->status == "baru")
+                                Proses Laundry
+                            @elseif($transaksi->status == "diproses")
+                                Laundry Selesai
+                            @else
+                                Laundry Diambil
+                            @endif
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+@endif
 
 @include('javascript')
-<script src="{{ asset('mobile/js/apexcharts.min.js') }}"></script>
-<script src="{{ asset('mobile/js/chart-active.js') }}"></script>
+
+<script>
+    function prosesTransaksi(orderNumber, status) {
+        let prosesStatus = "";
+        if (status === "baru") {
+            prosesStatus = "diproses";
+        } else if (status === "diproses") {
+            prosesStatus = "selesai";
+        } else {
+            prosesStatus = "diambil";
+        }
+
+        Swal.fire({
+            title:"Apakah anda yakin?",
+            text:"Untuk memproses transaksi ini.",
+            icon:"warning",
+            showCancelButton:!0,
+            confirmButtonText:"Proses Transaksi",
+            cancelButtonText:"Kembali",
+            confirmButtonClass:"btn btn-primary w-xs me-2 mt-2",
+            cancelButtonClass:"btn btn-danger w-xs mt-2",
+            buttonsStyling:!1,showCloseButton:!0
+        }).then(function(t){
+            if (t.value) {
+                $.ajax({
+                    url: `/proses-transaksi/${orderNumber}/${prosesStatus}`,
+                    method: "GET",
+                    success: function (params) {
+                        console.log(params);
+                        if (params.status) {
+                            Swal.fire({
+                                html:'<div class="mt-3">' +
+                                    '<lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon>' +
+                                    '<div class="mt-4 pt-2 fs-15">' +
+                                    '<h4>Proses Transaksi Berhasil !</h4>' +
+                                    `<p class="text-muted mx-4 mb-0">Transaksi dengan order number ${orderNumber} telah diproses.</p>` +
+                                    '</div>' +
+                                    '</div>',
+                                showCancelButton:!0,
+                                showConfirmButton:!1,
+                                cancelButtonClass:"btn btn-primary w-xs mb-1",
+                                cancelButtonText:"Kembali",
+                                buttonsStyling:!1,
+                                showCloseButton:!0
+                            }).then(function (res) {
+                                location.replace('{{ route('transaksi') }}');
+                            });
+                        } else {
+                            Swal.fire({
+                                html:'<div class="mt-3">' +
+                                    '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>' +
+                                    '<div class="mt-4 pt-2 fs-15">' +
+                                    '<h4>Gagal !</h4>' +
+                                    '<p class="text-muted mx-4 mb-0">Transaksi dengan order number ${orderNumber} telah diproses.</p>' +
+                                    '</div>' +
+                                    '</div>',
+                                showCancelButton:!0,
+                                showConfirmButton:!1,
+                                cancelButtonClass:"btn btn-primary w-xs mb-1",
+                                cancelButtonText:"Kembali",
+                                buttonsStyling:!1,
+                                showCloseButton:!0
+                            })
+                        }
+                    }
+                });
+            }
+        });
+    }
+</script>
 
 </body>
 </html>

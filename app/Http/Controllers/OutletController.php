@@ -49,7 +49,7 @@ class OutletController extends Controller
 
     function perpanjangLisensi($id): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {
-        $dataToko = $this->hitApiService->GET('api/toko/'.(int)base64_decode($id), []);
+        $dataToko = $this->hitApiService->GET('api/toko/'.$id, []);
         if (isset($dataToko) && $dataToko->status) {
             $dataLisensi = $this->hitApiService->GET('api/get-lisensi', []);
             $dataMetodePembayaran = $this->hitApiService->GET('api/get-metode-pembayaran', []);
@@ -58,9 +58,8 @@ class OutletController extends Controller
             $toko = $dataToko->data;
 
             $title = "outlet";
-            return view('outlet.masa_aktif', compact('title', 'toko', 'lisensi', 'metodePembayaran'));
+            return view('lainnya.outlet.perpanjang_lisensi', compact('title', 'toko', 'lisensi', 'metodePembayaran'));
         } else {
-            Session::flash('error', 'Outlet tidak ditemukan');
             return back();
         }
     }
@@ -144,9 +143,8 @@ class OutletController extends Controller
             $pembayaran = $dataPembayaran->data;
 
             $title = "pembayaran outlet";
-            return view('outlet.detail_pembayaran', compact('title', 'pembayaran'));
+            return view('lainnya.outlet.detail_pembayaran', compact('title', 'pembayaran'));
         } else {
-            Session::flash('error', 'Pembayaran tidak ditemukan');
             return back();
         }
     }

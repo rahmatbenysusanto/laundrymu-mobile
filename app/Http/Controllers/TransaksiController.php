@@ -141,4 +141,18 @@ class TransaksiController extends Controller
     {
         return view('transaksi.notif_berhasil');
     }
+
+    public function detailStatusTransaksi($order_number): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
+    {
+        $dataTransaksi = $this->hitApiService->GET('api/transaksi/'.$order_number, []);
+        if (isset($dataTransaksi) && $dataTransaksi->status && $dataTransaksi->data->transaksi != null) {
+            $transaksi = $dataTransaksi->data->transaksi;
+            $detail = $dataTransaksi->data->detail;
+            $histori = $dataTransaksi->data->transaksi->histori_status_transaksi;
+
+            return view('transaksi.detail_status', compact('transaksi', 'detail', 'histori'));
+        } else {
+            return back();
+        }
+    }
 }

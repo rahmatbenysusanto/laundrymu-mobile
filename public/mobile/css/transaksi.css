@@ -102,6 +102,25 @@
     letter-spacing: 0;
 }
 
+.status-pembayaran-warning {
+    display: flex;
+    width: 74px;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+    background: #fcecb7;
+    color: #ffd100;
+    text-align: center;
+    font-family: Gantari, sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 12px;
+    letter-spacing: 0;
+}
+
 .status-pembayaran-success {
     display: flex;
     width: 74px;

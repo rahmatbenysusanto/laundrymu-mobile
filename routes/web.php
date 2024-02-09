@@ -51,6 +51,7 @@ Route::middleware([CekLogin::class])->group(function () {
         Route::get('/tambah-transaksi', 'tambahTransaksi')->name('tambahTransaksi');
         Route::post('/buat-transaksi', 'buatTransaksi')->name('buatTransaksi');
         Route::get('/notifikasi-berhasil', 'notifSuccessCreateTransaksi')->name('notifSuccessCreateTransaksi');
+        Route::get('/detail-status-transaksi/{orderNumber}','detailStatusTransaksi');
     });
 
     Route::controller(\App\Http\Controllers\OutletController::class)->group(function () {
