@@ -18,6 +18,22 @@ class PelangganController extends Controller
         return view('pelanggan.index', compact('title', 'pelanggan'));
     }
 
+    public function getByJson(): \Illuminate\Http\JsonResponse
+    {
+        $dataPelanggan = $this->hitApiService->GET('api/pelanggan/toko/'.Session::get('toko')->id, []);
+
+        if (isset($dataPelanggan) && $dataPelanggan->status) {
+            return response()->json([
+                'status'    => true,
+                'data'      => $dataPelanggan->data
+            ], 200);
+        } else {
+            return response()->json([
+                'status'    => false,
+            ], 200);
+        }
+    }
+
     public function tambah(): View
     {
         return view('pelanggan.tambah');

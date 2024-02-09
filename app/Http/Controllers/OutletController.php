@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -92,7 +93,7 @@ class OutletController extends Controller
         $metodePembayaran = $dataMetodePembayaran->data ?? [];
 
         $title = "outlet";
-        return view('outlet.tambah', compact('title', 'provinsi', 'lisensi', 'metodePembayaran'));
+        return view('lainnya.outlet.tambah', compact('title', 'provinsi', 'lisensi', 'metodePembayaran'));
     }
 
     public function createOutlet(Request $request): \Illuminate\Http\JsonResponse
@@ -112,6 +113,8 @@ class OutletController extends Controller
             'metode_pembayaran_id'  => $request->post('metodePembayaran')
         ]);
 
+        Log::info(json_encode($create));
+
         if (isset($create) && $create->status) {
             return response()->json([
                 'status'    => true,
@@ -130,7 +133,7 @@ class OutletController extends Controller
         $pembayaran = $dataPembayaran->data ?? [];
 
         $title = "pembayaran outlet";
-        return view('outlet.histori_pembayaran', compact('title', 'pembayaran'));
+        return view('lainnya.outlet.histori_pembayaran', compact('title', 'pembayaran'));
     }
 
     public function detailPembayaran($nomor_pembayaran): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse

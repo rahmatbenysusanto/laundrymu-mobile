@@ -187,7 +187,13 @@
                         <div class="tab-pane fade active show" id="sass" role="tabpanel" aria-labelledby="sass-tab">
                             @foreach($transaksi as $tra)
                                 <div class="card card-transaksi">
-                                    <div class="card-header-transaksi">
+                                    @if($tra->status == "baru")
+                                        <div class="card-header-transaksi">
+                                    @elseif($tra->status == "diproses")
+                                        <div class="card-header-transaksi" style="border-left: 2px solid #FFBF36!important;">
+                                    @else
+                                        <div class="card-header-transaksi" style="border-left: 2px solid #00A3FF!important;">
+                                    @endif
                                         <div>
                                             <p class="status-transaksi">
                                                 @if($tra->status == "baru")
@@ -328,7 +334,7 @@
                             @foreach($transaksi as $tra)
                                 @if($tra->status == "diproses")
                                     <div class="card card-transaksi">
-                                        <div class="card-header-transaksi">
+                                        <div class="card-header-transaksi" style="border-left: 2px solid #FFBF36!important;">
                                             <div>
                                                 <p class="status-transaksi">
                                                     @if($tra->status == "baru")
@@ -399,7 +405,7 @@
                             @foreach($transaksi as $tra)
                                 @if($tra->status == "selesai")
                                     <div class="card card-transaksi">
-                                        <div class="card-header-transaksi">
+                                        <div class="card-header-transaksi" style="border-left: 2px solid #00A3FF!important;">
                                             <div>
                                                 <p class="status-transaksi">
                                                     @if($tra->status == "baru")

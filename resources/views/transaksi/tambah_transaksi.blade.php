@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="description" content="Affan - PWA Mobile HTML Template">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#0134d4">
@@ -66,34 +66,16 @@
             </a>
         </div>
         <div class="list-layanan" id="list-layanan">
-{{--            <div class="pt-3">--}}
-{{--                <div class="row">--}}
-{{--                    <div class="col-6">--}}
-{{--                        <p class="tra-lay-reguler-bold">Cuci Express</p>--}}
-{{--                        <p class="tra-lay-reguler">Rp. 10.000 / Kg</p>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-6">--}}
-{{--                        <div class="d-flex align-items-center">--}}
-{{--                            <input type="number" class="form-control form-control-sm" value="1.6">--}}
-{{--                            <a href="" class="btn btn-danger ms-2">Hapus</a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="pt-3">--}}
-{{--                <div class="row">--}}
-{{--                    <div class="col-6">--}}
-{{--                        <p class="tra-lay-reguler-bold">Cuci Express</p>--}}
-{{--                        <p class="tra-lay-reguler">Rp. 10.000 / Kg</p>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-6">--}}
-{{--                        <div class="d-flex align-items-center">--}}
-{{--                            <input type="number" class="form-control form-control-sm" value="1.6">--}}
-{{--                            <a href="" class="btn btn-danger ms-2">Hapus</a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+
+        </div>
+    </div>
+
+    <div class="card card-white p-3 mt-3">
+        <div class="d-flex justify-content-between">
+            <p class="text-bold-transaksi">Catatan<span class="tra-lay-reguler"> (Opsional)</span></p>
+        </div>
+        <div class="pt-2">
+            <textarea class="form-control form-control-clicked" id="catatan" name="textarea" cols="3" rows="5" placeholder="Catatan ..."></textarea>
         </div>
     </div>
 
@@ -114,10 +96,8 @@
         <div class="d-flex justify-content-between">
             <p class="text-bold-transaksi">Pelanggan<span class="transaksi-required"> Wajib diisi</span></p>
         </div>
-        <div class="pt-2">
-            <select class="form-select form-select-sm">
-                <option>Ambil Sendiri | Rp.0</option>
-            </select>
+        <div class="pt-2" id="pelanggan">
+            <a class="btn btn-primary btn-sm" onclick="modalPelanggan()">Pilih Pelanggan</a>
         </div>
     </div>
 
@@ -140,7 +120,7 @@
         </div>
         <div class="pt-2">
             <p class="tra-lay-reguler pb-1">Metode Pembayaran</p>
-            <select class="form-select form-select-sm">
+            <select class="form-select form-select-sm" id="pembayaran">
                 @foreach($pembayaran as $pem)
                     <option value="{{ $pem->id }}">{{ $pem->nama }}</option>
                 @endforeach
@@ -149,13 +129,13 @@
             <div class="row pt-2">
                 <div class="col-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadio" id="primaryRadio">
+                        <input class="form-check-input" type="radio" name="exampleRadio" id="primaryRadio" checked onclick="statusPembayaran('lunas')">
                         <p class="tra-lay-reguler">Lunas</p>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadio" id="primaryRadio">
+                        <input class="form-check-input" type="radio" name="exampleRadio" id="primaryRadio" onclick="statusPembayaran('belum lunas')">
                         <p class="tra-lay-reguler">Belum Lunas</p>
                     </div>
                 </div>
@@ -197,6 +177,10 @@
             <p class="tra-lay-reguler">Diskon</p>
             <p class="tra-lay-reguler" id="biayaDiskon">-</p>
         </div>
+        <div class="d-flex justify-content-between align-items-center pt-2">
+            <p class="tra-lay-reguler-bold">Total Harga</p>
+            <p class="tra-lay-reguler-bold" id="totalHarga">-</p>
+        </div>
     </div>
 </div>
 
@@ -237,6 +221,32 @@
     </div>
 </div>
 
+<div class="modal fade" id="modalPelanggan" tabindex="-1" aria-labelledby="fullscreenModalLabel">
+    <div class="modal-dialog modal-fullscreen-md-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="fullscreenModalLabel">Pilih Pelanggan</h6>
+                <button class="btn btn-close p-1 ms-auto" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table" id="datatables">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama</th>
+                            <th>No HP</th>
+                            <th>Pilihan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listPelanggan">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 @include('javascript')
 
 <script>
@@ -244,6 +254,10 @@
     localStorage.removeItem('biayaDiskon');
     localStorage.removeItem('biayaPengiriman');
     localStorage.removeItem('biayaParfum');
+    localStorage.removeItem('diskon');
+    localStorage.removeItem('totalHarga');
+    localStorage.removeItem('pelanggan');
+    localStorage.setItem('statusPembayaran', JSON.stringify('lunas'));
 
     function formatRupiah(angka, prefix){
         let number_string = angka.replace(/[^,\d]/g, '').toString(),
@@ -260,6 +274,53 @@
 
         rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
         return prefix === undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
+
+    function modalPelanggan() {
+        $.ajax({
+            url: '{{ route('getByJson') }}',
+            method: 'GET',
+            success: function (res) {
+                let pelanggan = res.data
+                let html = '';
+                let no = 1;
+                pelanggan.forEach(function (params) {
+                    html += `
+                        <tr>
+                            <td>${no++}</td>
+                            <td>${params.nama}</td>
+                            <td>${params.no_hp}</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" onclick="pilihPelanggan('${params.id}','${params.nama}','${params.no_hp}')">Pilih</a>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                document.getElementById('listPelanggan').innerHTML = html;
+                $("#modalPelanggan").modal("show");
+            }
+        });
+    }
+
+    function pilihPelanggan(id, nama, noHp) {
+        localStorage.setItem('pelanggan', JSON.stringify({
+            id: id,
+            nama: nama,
+            noHp: noHp
+        }));
+
+        document.getElementById('pelanggan').innerHTML = `
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="tra-lay-reguler-bold">${nama}</p>
+                    <p class="tra-lay-reguler">${noHp}</p>
+                </div>
+                <a class="btn btn-primary btn-sm" onclick="modalPelanggan()">Ubah Pelanggan</a>
+            </div>
+        `;
+
+        $("#modalPelanggan").modal("hide");
     }
 
     function viewLayanan() {
@@ -295,6 +356,7 @@
         biayaParfum();
         biayaPengiriman();
         biayaDiskon();
+        totalHarga();
     }
 
     function changeTotal(id, data) {
@@ -331,10 +393,18 @@
         viewLayanan();
     }
 
+    function statusPembayaran(status) {
+        localStorage.setItem('statusPembayaran', JSON.stringify(status));
+    }
+
     function changeParfum(data) {
         let valueParfum = data.value;
         let parfum = valueParfum.split('|');
         localStorage.setItem('biayaParfum', parfum[1]);
+        localStorage.setItem('parfum', JSON.stringify({
+            id: parfum[0],
+            nominal: parfum[1]
+        }));
         viewLayanan();
     }
 
@@ -342,6 +412,10 @@
         let valuePengiriman = data.value;
         let pengiriman = valuePengiriman.split('|');
         localStorage.setItem('biayaPengiriman', pengiriman[1]);
+        localStorage.setItem('pengiriman', JSON.stringify({
+            id: pengiriman[0],
+            nominal: pengiriman[1]
+        }));
         viewLayanan();
     }
 
@@ -359,6 +433,7 @@
             type: type
         }
         localStorage.setItem('diskon', JSON.stringify(diskon));
+        viewLayanan();
         $("#modalDiskon").modal("hide");
     }
 
@@ -387,8 +462,102 @@
     }
 
     function biayaDiskon() {
-        let diskon = JSON.parse(localStorage.getItem('biayaDiskon')) ?? 0;
-        document.getElementById('biayaDiskon').innerText = "Rp " + diskon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+        let biayaDiskon = JSON.parse(localStorage.getItem('biayaDiskon')) ?? 0;
+        document.getElementById('biayaDiskon').innerText = "Rp " + biayaDiskon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+
+        let diskon = JSON.parse(localStorage.getItem('diskon')) ?? {
+            id: 0,
+            nama: '',
+            nominal: 0,
+            type: 'nominal'
+        };
+        let layanan = JSON.parse(localStorage.getItem('biayaLayanan')) ?? 0;
+        let parfum = JSON.parse(localStorage.getItem('biayaParfum')) ?? 0;
+        let pengiriman = JSON.parse(localStorage.getItem('biayaPengiriman')) ?? 0;
+
+        if (diskon.type === "nominal") {
+            let hitungDiskon = (layanan + parfum + pengiriman) - diskon.nominal;
+            localStorage.setItem('totalHarga', JSON.stringify(hitungDiskon));
+            localStorage.setItem('biayaDiskon', diskon.nominal);
+            document.getElementById('biayaDiskon').innerText = "Rp " + diskon.nominal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+        } else {
+            let hitungDiskon = (layanan + parfum + pengiriman) * (diskon.nominal / 100);
+            let biayaDiskon = parseInt((layanan + parfum + pengiriman) - hitungDiskon);
+            localStorage.setItem('totalHarga', biayaDiskon);
+            localStorage.setItem('biayaDiskon', hitungDiskon);
+            document.getElementById('biayaDiskon').innerText = "Rp " + hitungDiskon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+        }
+    }
+
+    function totalHarga() {
+        let totalHarga = JSON.parse(localStorage.getItem('totalHarga')) ?? 0;
+        document.getElementById('totalHarga').innerText = "Rp " + totalHarga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    }
+
+    function prosesLayanan() {
+        // Validasi
+        let scoreValidate = 0;
+        let pelanggan = JSON.parse(localStorage.getItem('pelanggan')) ?? null
+        if (pelanggan === null) {
+            scoreValidate++;
+            Swal.fire({
+                html:'<div class="mt-3">' +
+                    '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>' +
+                    '<div class="mt-4 pt-2 fs-15">' +
+                    '<h4>Gagal !</h4>' +
+                    '<p class="text-muted mx-4 mb-0">Pelanggan tidak boleh kosong.</p>' +
+                    '</div>' +
+                    '</div>',
+                showCancelButton:!0,
+                showConfirmButton:!1,
+                cancelButtonClass:"btn btn-primary w-xs mb-1",
+                cancelButtonText:"Kembali",
+                buttonsStyling:!1,
+                showCloseButton:!0
+            });
+        }
+
+        if (scoreValidate === 0) {
+            $.ajax({
+                url: '{{ route('buatTransaksi') }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ @csrf_token() }}',
+                    layanan: JSON.parse(localStorage.getItem('transaksiLayanan')) ?? null,
+                    diskon: JSON.parse(localStorage.getItem('diskon')) ?? null,
+                    parfum: JSON.parse(localStorage.getItem('parfum')) ?? null,
+                    pelanggan: JSON.parse(localStorage.getItem('pelanggan')) ?? null,
+                    pengiriman: JSON.parse(localStorage.getItem('pengiriman')) ?? null,
+                    pembayaran: document.getElementById('pembayaran').value,
+                    statusPembayaran: JSON.parse(localStorage.getItem('statusPembayaran')) ?? null,
+                    catatan: document.getElementById('catatan').value,
+                    harga: localStorage.getItem('biayaLayanan') ?? 0,
+                    biayaDiskon: JSON.parse(localStorage.getItem('biayaDiskon')) ?? 0,
+                    totalHarga: JSON.parse(localStorage.getItem('totalHarga')) ?? 0,
+                },
+                success: function (response) {
+                    if (response.status) {
+                        location.href = '{{ route('notifSuccessCreateTransaksi') }}';
+                    } else {
+                        Swal.fire({
+                            html:'<div class="mt-3">' +
+                                '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>' +
+                                '<div class="mt-4 pt-2 fs-15">' +
+                                '<h4>Gagal !</h4>' +
+                                '<p class="text-muted mx-4 mb-0">Buat Transaksi Gagal.</p>' +
+                                '</div>' +
+                                '</div>',
+                            showCancelButton:!0,
+                            showConfirmButton:!1,
+                            cancelButtonClass:"btn btn-primary w-xs mb-1",
+                            cancelButtonText:"Kembali",
+                            buttonsStyling:!1,
+                            showCloseButton:!0
+                        });
+                    }
+                }
+            });
+        }
     }
 </script>
 
