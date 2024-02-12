@@ -49,64 +49,19 @@
         <div class="header-content header-style-five position-relative d-flex align-items-center justify-content-between">
             <!-- Logo Wrapper -->
             <div class="logo-wrapper">
-                <a href="mobile/page-home.html" class="title-page">Beranda</a>
+                <a href="#" class="title-page">Beranda</a>
             </div>
             <!-- Navbar Toggler -->
-            <div class="navbar--toggler" id="affanNavbarToggler" data-bs-toggle="offcanvas" data-bs-target="#affanOffcanvas" aria-controls="affanOffcanvas"><span class="d-block"></span><span class="d-block"></span><span class="d-block"></span></div>
+            <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <path d="M7.01923 18.1665H7.51923V17.6665V12.2378C7.51923 9.00094 9.68468 6.33141 12.515 5.72673L12.9503 5.63375L12.9084 5.19069C12.8958 5.05742 12.9097 4.92312 12.9488 4.79684C12.9879 4.6706 13.0509 4.55643 13.1322 4.46106C13.2135 4.36578 13.3108 4.29166 13.417 4.24167C13.523 4.19174 13.6363 4.1665 13.75 4.1665C13.8637 4.1665 13.977 4.19174 14.083 4.24167C14.1892 4.29166 14.2865 4.36578 14.3678 4.46106C14.4491 4.55643 14.5121 4.6706 14.5512 4.79684C14.5903 4.92312 14.6042 5.05743 14.5916 5.19069L14.5498 5.63281L14.9839 5.72651C16.3854 6.02903 17.6517 6.83753 18.5647 8.02305C19.4782 9.20907 19.9803 10.6979 19.9808 12.2378C19.9808 12.2379 19.9808 12.2379 19.9808 12.238V17.6665V18.1665H20.4808H21.6923C21.764 18.1665 21.8392 18.1964 21.8995 18.2604C21.9608 18.3254 22 18.4196 22 18.5236C22 18.6276 21.9608 18.7218 21.8995 18.7868C21.8392 18.8508 21.764 18.8808 21.6923 18.8808H20.4808H5.80769C5.736 18.8808 5.66077 18.8508 5.60046 18.7868C5.53921 18.7218 5.5 18.6276 5.5 18.5236C5.5 18.4196 5.5392 18.3254 5.60046 18.2604C5.66077 18.1964 5.736 18.1665 5.80769 18.1665H7.01923ZM15.8924 21.3093C15.8024 21.7548 15.5936 22.1644 15.2899 22.4868C14.8761 22.9258 14.3215 23.1665 13.75 23.1665C13.1785 23.1665 12.6239 22.9258 12.2101 22.4868C11.9064 22.1644 11.6976 21.7548 11.6076 21.3093H15.8924Z" stroke="#404040"/>
+                </svg>
+            </a>
         </div>
         <!-- # Header Five Layout End -->
     </div>
 </div>
-<!-- # Sidenav Left -->
-<!-- Offcanvas -->
-<div class="offcanvas offcanvas-start" id="affanOffcanvas" data-bs-scroll="true" tabindex="-1" aria-labelledby="affanOffcanvsLabel">
-    <button class="btn-close btn-close-white text-reset" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    <div class="offcanvas-body p-0">
-        <!-- Side Nav Wrapper -->
-        <div class="sidenav-wrapper">
-            <!-- Sidenav Profile -->
-            <div class="sidenav-profile bg-gradient">
-                <div class="sidenav-style1"></div>
-                <!-- User Thumbnail -->
-                <div class="user-profile"><img src="mobile/img/bg-img/2.jpg" alt=""></div>
-                <!-- User Info -->
-                <div class="user-info">
-                    <h6 class="user-name mb-0">Affan Islam</h6><span>CEO, Designing World</span>
-                </div>
-            </div>
-            <!-- Sidenav Nav -->
-            <ul class="sidenav-nav ps-0">
-                <li><a href="mobile/page-home.html"><i class="bi bi-house-door"></i>Home</a></li>
-                <li><a href="mobile/elements.html"><i class="bi bi-folder2-open"></i>Elements<span class="badge bg-danger rounded-pill ms-2">220+</span></a></li>
-                <li><a href="mobile/pages.html"><i class="bi bi-collection"></i>Pages<span class="badge bg-success rounded-pill ms-2">100+</span></a></li>
-                <li><a href="mobile/#"><i class="bi bi-cart-check"></i>Shop</a>
-                    <ul>
-                        <li><a href="mobile/page-shop-grid.html">Shop Grid</a></li>
-                        <li><a href="mobile/page-shop-list.html">Shop List</a></li>
-                        <li><a href="mobile/page-shop-details.html">Shop Details</a></li>
-                        <li><a href="mobile/page-cart.html">Cart</a></li>
-                        <li><a href="mobile/page-checkout.html">Checkout</a></li>
-                    </ul>
-                </li>
-                <li><a href="mobile/settings.html"><i class="bi bi-gear"></i>Settings</a></li>
-                <li>
-                    <div class="night-mode-nav"><i class="bi bi-moon"></i>Night Mode
-                        <div class="form-check form-switch">
-                            <input class="form-check-input form-check-success" id="darkSwitch" type="checkbox">
-                        </div>
-                    </div>
-                </li>
-                <li><a href="mobile/page-login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
-            </ul>
-            <!-- Social Info -->
-            <div class="social-info-wrap"><a href="mobile/#"><i class="bi bi-facebook"></i></a><a href="mobile/#"><i class="bi bi-twitter"></i></a><a href="mobile/#"><i class="bi bi-linkedin"></i></a></div>
-            <!-- Copyright Info -->
-            <div class="copyright-info">
-                <p>2022 &copy; Made by<a href="mobile/#">Designing World</a></p>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="page-content-wrapper">
 
     <div class="home-background-blue pt-2 position-relative">

@@ -54,9 +54,26 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function prosesRegister(Request $request)
+    public function prosesRegister(Request $request): \Illuminate\Http\RedirectResponse
     {
-        dd($request);
+        $result = $this->hitApiService->POSTLOGIN('api/user/register', [
+            'nama'      => $request->post('nama'),
+            'no_hp'     => $request->post('no_hp'),
+            'email'     => $request->post('email'),
+            'password'  => $request->post('password'),
+            'role'      => 'owner',
+            'outlet'    => $request->post('outlet')
+        ]);
+
+        Log::info(json_encode($result));
+
+        if (isset($result) && $result->status) {
+            Session::flash('success', 'Buat akun berhasil, silahkan login');
+        } else {
+            Session::flash('error', $result->errors);
+        }
+
+        return back();
     }
 
     public function generateNewToken(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
@@ -92,6 +109,35 @@ class AuthController extends Controller
                 'error'     => $err->getMessage()
             ]);
         }
+    }
+
+    public function verifikasiOtp(): View
+    {
+        return view('auth.otp');
+    }
+
+    public function prosesOTP(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $result = $this->hitApiService->POST('api/verifikasi-otp', [
+            'user_id'   => Session::get('data_user')->id,
+            'otp'       => $request->post('kode1').$request->post('kode2').$request->post('kode3').$request->post('kode4')
+        ]);
+
+        if (isset($result) && $result->status) {
+            return redirect()->to(route('dashboard'));
+        } else {
+            Session::flash('error', 'Kode OTP salah, silahkan coba lagi');
+            return back();
+        }
+    }
+
+    public function generateNewOTP(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $result = $this->hitApiService->GET('api/generate-new-otp/'.Session::get('data_user')->id, []);
+
+        return response()->json([
+            'status'  => $result->status
+        ], 200);
     }
 
     public function logout(): \Illuminate\Http\RedirectResponse

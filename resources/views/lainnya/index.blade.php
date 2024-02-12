@@ -77,7 +77,7 @@
                             <i class="fa-light fa-money-check-dollar fa-sm" style="color: #19c22d;"></i>
                             <p class="pendapatan-text">Pendapatan Hari Ini</p>
                         </div>
-                        <p class="pendapatan-nominal">Rp1.000.000</p>
+                        <p class="pendapatan-nominal">Rp{{ number_format($transaksiHarian->nominal) }}</p>
                     </div>
                 </div>
                 <div class="col-6">
@@ -86,7 +86,7 @@
                             <i class="fa-light fa-washing-machine fa-sm" style="color: #00a3ff;"></i>
                             <p class="pendapatan-text">Transaksi Hari Ini</p>
                         </div>
-                        <p class="pendapatan-nominal">100</p>
+                        <p class="pendapatan-nominal">{{ $transaksiHarian->jumlah }}</p>
                     </div>
                 </div>
             </div>

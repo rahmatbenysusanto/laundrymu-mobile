@@ -22,7 +22,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'login')->name('login');
     Route::post('/proses-login', 'prosesLogin')->name('prosesLogin');
     Route::get('/generate-new-token', 'generateNewToken')->name('generateNewToken');
+    Route::get('/verifikasi-otp', 'verifikasiOtp')->name('verifikasiOtp');
+    Route::post('/proses-verifikasi-otp', 'prosesOTP')->name('prosesOTP');
     Route::get('/logout', 'logout')->name('logout');
+    Route::get('/generate-new-otp', 'generateNewOTP')->name('generateNewOTP');
 });
 
 Route::middleware([CekLogin::class])->group(function () {
@@ -120,5 +123,9 @@ Route::middleware([CekLogin::class])->group(function () {
         Route::get('/get-kecamatan', 'getKecamatan')->name('getKecamatan');
         Route::get('/get-kelurahan', 'getKelurahan')->name('getKelurahan');
         Route::get('/get-kode-pos', 'getKodePos')->name('getKodePos');
+    });
+
+    Route::controller(\App\Http\Controllers\LaporanController::class)->group(function () {
+        Route::get('/laporan', 'index')->name('laporan');
     });
 });
