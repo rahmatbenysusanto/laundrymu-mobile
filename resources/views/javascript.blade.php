@@ -4,14 +4,12 @@
 <script src="{{ asset('mobile/js/tiny-slider.js') }}"></script>
 <script src="{{ asset('mobile/js/baguetteBox.min.js') }}"></script>
 <script src="{{ asset('mobile/js/rangeslider.min.js') }}"></script>
-<script src="{{ asset('mobile/js/vanilla-dataTables.min.js') }}"></script>
 <script src="{{ asset('mobile/js/index.js') }}"></script>
 <script src="{{ asset('mobile/js/imagesloaded.pkgd.min.js') }}"></script>
 <script src="{{ asset('mobile/js/isotope.pkgd.min.js') }}"></script>
 <script src="{{ asset('mobile/js/dark-rtl.js') }}"></script>
 <script src="{{ asset('mobile/js/active.js') }}"></script>
 <script src="{{ asset('mobile/js/pwa.js') }}"></script>
-<script src="{{ asset('mobile/js/vanilla-dataTables.min.js') }}"></script>
 <script src="https://app.laundrymu.id/assets/libs/sweetalert2/sweetalert2.min.js"></script>
 <script src="https://app.laundrymu.id/assets/js/pages/sweetalerts.init.js"></script>
 
