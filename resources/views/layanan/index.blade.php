@@ -30,6 +30,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('mobile/css/transaksi.css') }}">
+    <style>
+        .dt-search {
+            display: none;
+        }
+    </style>
 
 </head>
 <body>
@@ -66,14 +71,14 @@
     <section id="list-transaksi-header">
         <div class="container">
             <div class="pb-3 pt-3">
-                <input type="text" class="form-control" placeholder="Cari nama layanan">
+                <input type="text" class="form-control" placeholder="Cari nama layanan" id="search">
             </div>
         </div>
     </section>
 
     <div class="mt-3"></div>
     <div class="container">
-        <table class="w-100">
+        <table class="w-100" id="listLayanan">
             <thead>
                 <tr>
                     <th></th>
@@ -127,6 +132,19 @@
 @include('menu')
 
 @include('javascript')
+
+<script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
+
+<script>
+    let table = $("#listLayanan").DataTable({
+        paging: false,
+        order: false
+    });
+
+    $('#search').on( 'keyup', function () {
+        table.search( this.value ).draw();
+    });
+</script>
 
 <script>
     function pilihan(id) {

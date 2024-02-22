@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="description" content="Affan - PWA Mobile HTML Template">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#0134d4">
@@ -599,19 +599,23 @@
 
 <script>
     let table = $("#semuaTransaksi").DataTable({
-        paging: false
+        paging: false,
+        order: false
     });
 
     let baru = $("#transaksiBaru").DataTable({
-        paging: false
+        paging: false,
+        order: false
     });
 
     let diproses = $("#transaksiDiproses").DataTable({
-        paging: false
+        paging: false,
+        order: false
     });
 
     let selesai = $("#transaksiSelesai").DataTable({
-        paging: false
+        paging: false,
+        order: false
     });
 
     $('#searchTransaksi').on( 'keyup', function () {
@@ -619,7 +623,7 @@
         baru.search( this.value ).draw();
         diproses.search( this.value ).draw();
         selesai.search( this.value ).draw();
-    } );
+    });
 </script>
 
 <script>
