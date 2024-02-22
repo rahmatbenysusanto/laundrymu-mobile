@@ -294,11 +294,11 @@
                                                                             <div class="col-5">
                                                                                 <a onclick="prosesTransaksi('{{ $tra->order_number }}', '{{ $tra->status }}')" class="btn btn-blue">
                                                                                     @if($tra->status == "baru")
-                                                                                        Proses Laundry
+                                                                                        Proses
                                                                                     @elseif($tra->status == "diproses")
-                                                                                        Laundry Selesai
+                                                                                        Selesai
                                                                                     @else
-                                                                                        Laundry Diambil
+                                                                                        Diambil
                                                                                     @endif
                                                                                 </a>
                                                                             </div>
@@ -377,11 +377,11 @@
                                                             <div class="col-5">
                                                                 <a onclick="prosesTransaksi('{{ $tra->order_number }}', '{{ $tra->status }}')" class="btn btn-blue">
                                                                     @if($tra->status == "baru")
-                                                                        Proses Laundry
+                                                                        Proses
                                                                     @elseif($tra->status == "diproses")
-                                                                        Laundry Selesai
+                                                                        Selesai
                                                                     @else
-                                                                        Laundry Diambil
+                                                                        Diambil
                                                                     @endif
                                                                 </a>
                                                             </div>
@@ -461,11 +461,11 @@
                                                             <div class="col-5">
                                                                 <a onclick="prosesTransaksi('{{ $tra->order_number }}', '{{ $tra->status }}')" class="btn btn-blue">
                                                                     @if($tra->status == "baru")
-                                                                        Proses Laundry
+                                                                        Proses
                                                                     @elseif($tra->status == "diproses")
-                                                                        Laundry Selesai
+                                                                        Selesai
                                                                     @else
-                                                                        Laundry Diambil
+                                                                        Diambil
                                                                     @endif
                                                                 </a>
                                                             </div>
@@ -545,11 +545,11 @@
                                                                 <div class="col-5">
                                                                     <a onclick="prosesTransaksi('{{ $tra->order_number }}', '{{ $tra->status }}')" class="btn btn-blue">
                                                                         @if($tra->status == "baru")
-                                                                            Proses Laundry
+                                                                            Proses
                                                                         @elseif($tra->status == "diproses")
-                                                                            Laundry Selesai
+                                                                            Selesai
                                                                         @else
-                                                                            Laundry Diambil
+                                                                            Diambil
                                                                         @endif
                                                                     </a>
                                                                 </div>
