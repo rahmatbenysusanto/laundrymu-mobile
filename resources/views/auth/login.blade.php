@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset('mobile/css/sweetalert.css') }}">
     <title>Login</title>
 </head>
 <body>
@@ -30,15 +31,15 @@
         <div class="mb-2">
             <label for="password" class="form-label">Kata Sandi</label><br>
             <div class="input-group">
-                <input class="form-control" id="password" name="password" placeholder="Masukkan kata sandi" value="">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan kata sandi" value="">
                 <span class="input-group-text">
-                        <i class="fa fa-eye" style="cursor: pointer"></i>
+                        <i class="fa fa-eye toggle-password" style="cursor: pointer"></i>
                     </span>
             </div>
         </div>
 
         <div>
-            <a href="#" class="lupa-kata-sandi">Lupa kata sandi?</a>
+            <a href="{{ route('lupaKataSandi') }}" class="lupa-kata-sandi">Lupa kata sandi?</a>
         </div>
 
         <div class="d-grid gap-2">
@@ -50,5 +51,59 @@
         </div>
     </form>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://app.laundrymu.id/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+<script src="https://app.laundrymu.id/assets/js/pages/sweetalerts.init.js"></script>
+<script>
+    $(".toggle-password").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        let input = $($(this).attr("toggle"));
+        if (document.getElementById('password').type === "password") {
+            document.getElementById('password').type = "text";
+        } else {
+            document.getElementById('password').type = "password";
+        }
+    });
+</script>
+@if($message = Session::get('success'))
+    <script>
+        Swal.fire({
+            html:'<div class="mt-3">' +
+                '<lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon>' +
+                '<div class="mt-4 pt-2 fs-15">' +
+                '<h4>Berhasil !</h4>' +
+                '<p class="text-muted mx-4 mb-0">{{ $message }}.</p>' +
+                '</div>' +
+                '</div>',
+            showCancelButton:!0,
+            showConfirmButton:!1,
+            cancelButtonClass:"btn btn-primary w-xs mb-1",
+            cancelButtonText:"Kembali",
+            buttonsStyling:!1,
+            showCloseButton:!0
+        });
+    </script>
+@endif
+
+@if($message = Session::get('error'))
+    <script>
+        Swal.fire({
+            html:'<div class="mt-3">' +
+                '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>' +
+                '<div class="mt-4 pt-2 fs-15">' +
+                '<h4>Gagal !</h4>' +
+                '<p class="text-muted mx-4 mb-0">{{ $message }}</p>' +
+                '</div>' +
+                '</div>',
+            showCancelButton:!0,
+            showConfirmButton:!1,
+            cancelButtonClass:"btn btn-primary w-xs mb-1",
+            cancelButtonText:"Kembali",
+            buttonsStyling:!1,
+            showCloseButton:!0
+        })
+    </script>
+@endif
 </body>
 </html>

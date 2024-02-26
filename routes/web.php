@@ -26,6 +26,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/proses-verifikasi-otp', 'prosesOTP')->name('prosesOTP');
     Route::get('/logout', 'logout')->name('logout');
     Route::get('/generate-new-otp', 'generateNewOTP')->name('generateNewOTP');
+    Route::get('/lupa-kata-sandi', 'lupaKataSandi')->name('lupaKataSandi');
+    Route::post('/lupa-kata-sandi', 'lupaKataSandiProses')->name('lupaKataSandiProses');
+    Route::get('/lupa-password/{link}', 'changePassword')->name('changePassword');
+    Route::post('/lupa-password', 'changePasswordProses')->name('changePasswordProses');
 });
 
 Route::middleware([CekLogin::class])->group(function () {

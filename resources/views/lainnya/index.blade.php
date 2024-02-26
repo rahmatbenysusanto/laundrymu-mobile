@@ -338,7 +338,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="d-grid gap-2" style="margin-bottom: 75px; margin-top: 16px">
-                    <a href="{{ route('logout') }}" class="btn btn-primary">Keluar</a>
+                    <a onclick="logout()" class="btn btn-primary">Keluar</a>
                 </div>
             </div>
         </div>
@@ -349,6 +349,13 @@
 @include('menu')
 
 @include('javascript')
+
+<script>
+    function logout() {
+        localStorage.removeItem("dt");
+        window.location.href = "{{ route('logout') }}";
+    }
+</script>
 
 </body>
 </html>

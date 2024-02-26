@@ -140,6 +140,62 @@ class AuthController extends Controller
         ], 200);
     }
 
+    public function lupaKataSandi(): View
+    {
+        return view('auth.lupa_kata_sandi');
+    }
+
+    public function lupaKataSandiProses(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $hit = $this->hitApiService->POST("api/lupa-kata-sandi", [
+            "email" => $request->post("email")
+        ]);
+
+        if (isset($hit) && $hit->status) {
+            Session::flash('success', 'Permintaan lupa kata sandi telah dikirim ke email');
+        } else {
+            Session::flash('error', 'User dengan email '.$request->post('email').' tidak terdaftar');
+        }
+
+        return back();
+    }
+
+    public function changePassword($link)
+    {
+        $email = base64_decode($link);
+        $check = $this->hitApiService->GET("api/check-validate-email/".$link, []);
+
+        if (isset($check) && $check->status) {
+            return view('auth.ganti_password', compact('email'));
+        } else {
+            return redirect()->action([AuthController::class, 'login']);
+        }
+    }
+
+    public function changePasswordProses(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $password = $request->post('password');
+        $passwordRepeat = $request->post('passwordRepeat');
+
+        if ($password != $passwordRepeat) {
+            Session::flash('error', 'Password tidak sama!');
+        }
+
+        $result = $this->hitApiService->POST("api/ganti-password", [
+            "otp"       => $request->post("otp"),
+            "password"  => $request->post("password"),
+            "email"     => $request->post("email")
+        ]);
+
+        if (isset($result) && $result->status) {
+            Session::flash('success', 'Ganti Password berhasil!, Silahkan login menggunakan password baru anda');
+            return redirect()->action([AuthController::class, 'login']);
+        } else {
+            Session::flash('error', 'Ganti Password Gagal');
+            return back();
+        }
+    }
+
     public function logout(): \Illuminate\Http\RedirectResponse
     {
         Session::forget('data_user');
