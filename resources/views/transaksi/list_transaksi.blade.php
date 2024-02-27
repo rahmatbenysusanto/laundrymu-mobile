@@ -793,13 +793,17 @@
     }
 
     function printStruk(orderNumber) {
-        let header_str = '<html lang=""><head><title>' + document.title  + '</title></head><body>';
-        let footer_str = '</body></html>';
-        let new_str = '<h4>Tes Nota</h4>';
-        let old_str = document.body.innerHTML;
-        document.body.innerHTML = header_str + new_str + footer_str;
+        document.body.innerHTML = `
+            <html lang="">
+                <head>
+                    <title></title>
+                </head>
+                <body>
+                    <h3>Testing Nota</h3>
+                </body>
+            </html>
+        `;
         window.print();
-        document.body.innerHTML = old_str;
         return false;
     }
 </script>
