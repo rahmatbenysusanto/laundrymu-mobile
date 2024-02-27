@@ -75,6 +75,15 @@
         table {
             width: 100%!important;
         }
+
+        @media print {
+            body {
+                display: none; /* Sembunyikan halaman saat mencetak */
+            }
+            #printedContent {
+                display: block; /* Tampilkan konten yang akan dicetak */
+            }
+        }
     </style>
 
 </head>
@@ -659,6 +668,8 @@
     </div>
 </div>
 
+<div id="myDiv">Konten yang akan dicetak</div>
+
 @include('menu')
 
 @include('javascript')
@@ -793,18 +804,17 @@
     }
 
     function printStruk(orderNumber) {
-        document.body.innerHTML = `
-            <html lang="">
-                <head>
-                    <title></title>
-                </head>
-                <body>
-                    <h3>Testing Nota</h3>
-                </body>
-            </html>
-        `;
+        let konten = document.getElementById("myDiv").innerHTML;
+        let body = document.body.innerHTML;
+
+        // Menampilkan konten yang akan dicetak dan menyembunyikan halaman utama
+        document.body.innerHTML = '<div id="printedContent"><pre>' + konten + '</pre></div>';
+
+        // Mencetak konten
         window.print();
-        return false;
+
+        // Mengembalikan tampilan halaman utama setelah pencetakan selesai
+        document.body.innerHTML = body;
     }
 </script>
 
