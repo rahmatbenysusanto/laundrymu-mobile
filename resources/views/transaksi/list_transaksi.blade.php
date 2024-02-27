@@ -176,7 +176,7 @@
                             <button class="btn menu-title" id="pug-tab" data-bs-toggle="tab" data-bs-target="#pug" type="button" role="tab" aria-controls="pug" aria-selected="false">Selesai</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="btn menu-title" id="haha" data-bs-toggle="tab" data-bs-target="#pug" type="button" role="tab" aria-controls="pug" aria-selected="false">Diambil</button>
+                            <button class="btn menu-title" id="haha" data-bs-toggle="tab" data-bs-target="#diambil" type="button" role="tab" aria-controls="pug" aria-selected="false">Diambil</button>
                         </li>
                     </ul>
                 </div>
@@ -570,6 +570,74 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="tab-pane fade" id="diambil" role="tabpanel" aria-labelledby="pug-tab">
+                            <table id="transaksiDiambil">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($transaksiDiambil as $tra)
+                                    <tr>
+                                        <td>
+                                            <div class="card card-transaksi">
+                                                <div class="card-header-transaksi" style="border-left: 2px solid #19C22D!important;">
+                                                    <div>
+                                                        <p class="status-transaksi">
+                                                            Diambil
+                                                        </p>
+                                                        <p class="text-transaksi mb-2">{{ tanggal_jam_indo($tra->created_at) }}</p>
+                                                        <p class="text-transaksi">{{ $tra->pelanggan->nama }} | {{ $tra->pelanggan->no_hp }}</p>
+                                                    </div>
+                                                    @if($tra->status_pembayaran == "lunas")
+                                                        <span class="status-pembayaran-success">Lunas</span>
+                                                    @else
+                                                        <span class="status-pembayaran-danger">Belum Lunas</span>
+                                                    @endif
+                                                </div>
+                                                <div class="card-center-header">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div>
+                                                            <p class="jenis-layanan">{{ $tra->transaksi_detail[0]->layanan->nama }}</p>
+                                                            @if(count($tra->transaksi_detail) != 1)
+                                                                <p class="keterangan-layanan">+{{ count($tra->transaksi_detail) - 1 }} Layanan Lainnya</p>
+                                                            @endif
+                                                        </div>
+                                                        <div>
+                                                            <div class="d-flex align-content-center align-items-center">
+                                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M11.427 3.00412C10.082 3.04112 9.0395 3.40612 8.0245 3.75912C6.939 4.13612 5.9145 4.49162 4.495 4.50612C3.5465 4.52112 2.5965 4.35712 1.663 4.03412L1 3.80512V12.3461L1.333 12.4646C2.2025 12.7721 3.0915 12.9496 3.9765 12.9916C4.117 12.9981 4.2545 13.0016 4.3895 13.0016C5.896 13.0016 7.0495 12.6016 8.168 12.2156C9.347 11.8076 10.459 11.4221 11.9765 11.4936C12.7808 11.5349 13.5748 11.694 14.333 11.9656L15 12.2016V3.65712L14.671 3.53712C13.8202 3.22727 12.9271 3.04922 12.0225 3.00912C11.8241 3.00032 11.6255 2.99865 11.427 3.00412ZM11.454 3.99712C11.624 3.99212 11.798 3.99212 11.9785 3.99912C12.1655 4.00712 12.3525 4.02412 12.539 4.04612C12.6151 4.35985 12.8098 4.63187 13.0822 4.80502C13.3547 4.97817 13.6837 5.03896 14 4.97462V9.52562C13.8362 9.49229 13.6674 9.49221 13.5036 9.52539C13.3397 9.55857 13.1843 9.62434 13.0463 9.71878C12.9084 9.81323 12.7909 9.93442 12.7007 10.0752C12.6106 10.2159 12.5496 10.3734 12.5215 10.5381C12.3559 10.5211 12.1898 10.5088 12.0235 10.5011C10.316 10.4261 9.057 10.8556 7.84 11.2776C6.6595 11.6866 5.541 12.0731 4.0245 12.0011C3.83563 11.9912 3.64717 11.9746 3.4595 11.9511C3.38278 11.6383 3.18801 11.3672 2.91597 11.1947C2.64393 11.0222 2.3157 10.9616 2 11.0256V6.47462C2.16477 6.50816 2.33463 6.50801 2.49934 6.47418C2.66406 6.44035 2.82022 6.37355 2.95844 6.27779C3.09666 6.18203 3.21408 6.05929 3.30363 5.91697C3.39317 5.77464 3.453 5.61567 3.4795 5.44962C3.822 5.48512 4.1645 5.50562 4.506 5.50012C6.0885 5.48412 7.239 5.08362 8.3525 4.69662C9.333 4.35512 10.2675 4.03412 11.454 3.99712ZM8 5.50012C6.897 5.50012 6 6.62162 6 8.00012C6 9.37862 6.897 10.5001 8 10.5001C9.103 10.5001 10 9.37862 10 8.00012C10 6.62162 9.103 5.50012 8 5.50012ZM8 6.50012C8.542 6.50012 9 7.18712 9 8.00012C9 8.81312 8.542 9.50012 8 9.50012C7.458 9.50012 7 8.81312 7 8.00012C7 7.18712 7.458 6.50012 8 6.50012ZM11.75 6.50012C11.5511 6.50012 11.3603 6.57914 11.2197 6.71979C11.079 6.86045 11 7.05121 11 7.25012C11 7.44904 11.079 7.6398 11.2197 7.78045C11.3603 7.92111 11.5511 8.00012 11.75 8.00012C11.9489 8.00012 12.1397 7.92111 12.2803 7.78045C12.421 7.6398 12.5 7.44904 12.5 7.25012C12.5 7.05121 12.421 6.86045 12.2803 6.71979C12.1397 6.57914 11.9489 6.50012 11.75 6.50012ZM4.25 8.00012C4.05109 8.00012 3.86032 8.07914 3.71967 8.21979C3.57902 8.36045 3.5 8.55121 3.5 8.75012C3.5 8.94904 3.57902 9.1398 3.71967 9.28045C3.86032 9.42111 4.05109 9.50012 4.25 9.50012C4.44891 9.50012 4.63968 9.42111 4.78033 9.28045C4.92098 9.1398 5 8.94904 5 8.75012C5 8.55121 4.92098 8.36045 4.78033 8.21979C4.63968 8.07914 4.44891 8.00012 4.25 8.00012Z" fill="#19C22D"/>
+                                                                </svg>
+                                                                <p class="jenis-pembayaran">{{ $tra->pembayaran->nama }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-bottom-transaksi">
+                                                    <div class="row">
+                                                        <div class="col-5">
+                                                            <a class="btn btn-putih" onclick="printStruk('{{ $tra->order_number }}')">Cetak Nota</a>
+                                                        </div>
+                                                        <div class="col-5">
+
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <a onclick="pilihan('{{ $tra->order_number }}')" class="btn btn-icon">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                    <path d="M9 15.25C9 14.9185 9.1317 14.6005 9.36612 14.3661C9.60054 14.1317 9.91848 14 10.25 14C10.5815 14 10.8995 14.1317 11.1339 14.3661C11.3683 14.6005 11.5 14.9185 11.5 15.25C11.5 15.5815 11.3683 15.8995 11.1339 16.1339C10.8995 16.3683 10.5815 16.5 10.25 16.5C9.91848 16.5 9.60054 16.3683 9.36612 16.1339C9.1317 15.8995 9 15.5815 9 15.25ZM9 10.25C9 9.91848 9.1317 9.60054 9.36612 9.36612C9.60054 9.1317 9.91848 9 10.25 9C10.5815 9 10.8995 9.1317 11.1339 9.36612C11.3683 9.60054 11.5 9.91848 11.5 10.25C11.5 10.5815 11.3683 10.8995 11.1339 11.1339C10.8995 11.3683 10.5815 11.5 10.25 11.5C9.91848 11.5 9.60054 11.3683 9.36612 11.1339C9.1317 10.8995 9 10.5815 9 10.25ZM9 5.25C9 4.91848 9.1317 4.60054 9.36612 4.36612C9.60054 4.1317 9.91848 4 10.25 4C10.5815 4 10.8995 4.1317 11.1339 4.36612C11.3683 4.60054 11.5 4.91848 11.5 5.25C11.5 5.58152 11.3683 5.89946 11.1339 6.13388C10.8995 6.3683 10.5815 6.5 10.25 6.5C9.91848 6.5 9.60054 6.3683 9.36612 6.13388C9.1317 5.89946 9 5.58152 9 5.25Z" fill="#262626"/>
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -618,11 +686,17 @@
         order: false
     });
 
+    let diambil = $("#transaksiDiambil").DataTable({
+        paging: false,
+        order: false
+    });
+
     $('#searchTransaksi').on( 'keyup', function () {
         table.search( this.value ).draw();
         baru.search( this.value ).draw();
         diproses.search( this.value ).draw();
         selesai.search( this.value ).draw();
+        diambil.search( this.value ).draw();
     });
 </script>
 
@@ -719,17 +793,14 @@
     }
 
     function printStruk(orderNumber) {
-        document.body.innerHTML = `
-            <html lang="">
-                <head>
-                    <title></title>
-                </head>
-                <body>
-                    <h3>Testing Nota</h3>
-                </body>
-            </html>
-        `;
+        let header_str = '<html lang=""><head><title>' + document.title  + '</title></head><body>';
+        let footer_str = '</body></html>';
+        let new_str = '<h4>Tes Nota</h4>';
+        let old_str = document.body.innerHTML;
+        document.body.innerHTML = header_str + new_str + footer_str;
         window.print();
+        document.body.innerHTML = old_str;
+        return false;
     }
 </script>
 

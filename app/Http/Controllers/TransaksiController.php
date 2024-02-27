@@ -12,9 +12,11 @@ class TransaksiController extends Controller
     public function index(): View
     {
         $dataTransaksi = $this->hitApiService->GET('api/transaksi/toko/'.Session::get('toko')->id, []);
+        $dataTransaksiDiambil = $this->hitApiService->GET('api/transaksi/toko/'.Session::get('toko')->id.'/'.'diambil', []);
         $transaksi = $dataTransaksi->data ?? [];
+        $transaksiDiambil = $dataTransaksiDiambil->data ?? [];
 
-        return view('transaksi.list_transaksi', compact('transaksi'));
+        return view('transaksi.list_transaksi', compact('transaksi', 'transaksiDiambil'));
     }
 
     public function detail($orderNumber): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
