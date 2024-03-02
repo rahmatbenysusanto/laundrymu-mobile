@@ -138,4 +138,13 @@ Route::middleware([CekLogin::class])->group(function () {
         Route::get('/chat/get-chat', 'getChat')->name('getChat');
         Route::post('/chat', 'create')->name('sendChat');
     });
+
+    Route::controller(\App\Http\Controllers\BarangController::class)->group(function () {
+        Route::get('/inventory/list-pembelian', 'listPembelianBarang')->name('listPembelianBarang');
+        Route::get('/pembelian-barang-baru', 'pembelianBarang')->name('pembelianBarang');
+        Route::post('/proses-pembelian', 'pembelian')->name('prosesPembelian');
+        Route::get('/tambah-stok-barang', 'tambahStokBarang')->name('tambahStokBarang');
+        Route::post('/proses-tambah-stok-barang', 'prosesTambahStokBarang')->name('prosesTambahStokBarang');
+        Route::get('/list-barang', 'listBarang')->name('listBarang');
+    });
 });
