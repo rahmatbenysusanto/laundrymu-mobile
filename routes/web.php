@@ -132,4 +132,10 @@ Route::middleware([CekLogin::class])->group(function () {
     Route::controller(\App\Http\Controllers\LaporanController::class)->group(function () {
         Route::get('/laporan', 'index')->name('laporan');
     });
+
+    Route::controller(\App\Http\Controllers\ChatController::class)->group(function () {
+        Route::get('/chat', 'index')->name('chat');
+        Route::get('/chat/get-chat', 'getChat')->name('getChat');
+        Route::post('/chat', 'create')->name('sendChat');
+    });
 });
