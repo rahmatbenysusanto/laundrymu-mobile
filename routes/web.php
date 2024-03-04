@@ -131,6 +131,11 @@ Route::middleware([CekLogin::class])->group(function () {
 
     Route::controller(\App\Http\Controllers\LaporanController::class)->group(function () {
         Route::get('/laporan', 'index')->name('laporan');
+        Route::get('/laporan/ops-transaksi', 'ops_transaksi')->name('ops_transaksi');
+        Route::get('/laporan/ops-layanan', 'ops_layanan')->name('ops_layanan');
+        Route::get('/laporan/ops-parfum', 'ops_parfum')->name('ops_parfum');
+        Route::get('/laporan/ops-diskon', 'ops_diskon')->name('ops_diskon');
+        Route::get('/laporan/ops-pembayaran', 'ops_pembayaran')->name('ops_pembayaran');
     });
 
     Route::controller(\App\Http\Controllers\ChatController::class)->group(function () {
@@ -146,5 +151,8 @@ Route::middleware([CekLogin::class])->group(function () {
         Route::get('/tambah-stok-barang', 'tambahStokBarang')->name('tambahStokBarang');
         Route::post('/proses-tambah-stok-barang', 'prosesTambahStokBarang')->name('prosesTambahStokBarang');
         Route::get('/list-barang', 'listBarang')->name('listBarang');
+        Route::get('/list-penggunaan-barang', 'listPenggunaan')->name('listPenggunaan');
+        Route::get('/tambah-penggunaan-barang', 'tambahPenggunaan')->name('tambahPenggunaan');
+        Route::post('/proses-penggunaan-barang', 'prosesPenggunaan')->name('prosesPenggunaan');
     });
 });

@@ -133,6 +133,49 @@
             gap: 4px;
             align-self: stretch;
         }
+
+        .box-laporan {
+            background: #FFF;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
+            padding: 0 16px;
+        }
+
+        .box-layanan {
+            border-radius: 6px;
+            border: 1px solid #EDEDED;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12);
+            padding: 16px 8px;
+            display: inline-block;
+            margin-right: 16px;
+            min-width: 104px;
+        }
+
+        div.list-layanan {
+            background-color: #FFFFFF;
+            overflow: auto;
+            white-space: nowrap;
+        }
+
+        .layanan-menu {
+            color: #262626;
+            font-family: Gantari, sans-serif;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px;
+            margin-bottom: 4px;
+        }
+
+        .layanan-jumlah {
+            color: rgba(67, 67, 67, 0.96);
+            font-family: Gantari, sans-serif;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 28px;
+            letter-spacing: -0.34px;
+            margin-bottom: 0;
+        }
     </style>
 
 </head>
@@ -193,13 +236,13 @@
                     <div class="col-6">
                         <div class="card-ringkasan">
                             <p class="card-ringkasan-title">Transaksi Selesai</p>
-                            <p class="card-ringkasan-jumlah">45</p>
+                            <p class="card-ringkasan-jumlah" id="transaksi-selesai">0</p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="card-ringkasan">
                             <p class="card-ringkasan-title">Transaksi Dibatalkan</p>
-                            <p class="card-ringkasan-jumlah">1</p>
+                            <p class="card-ringkasan-jumlah" id="transaksi-batal">0</p>
                         </div>
                     </div>
                 </div>
@@ -212,7 +255,68 @@
                 </div>
                 <p class="text mt-1">Rutin pantau preferensi pelanggan untuk meningkatkan kepuasan dengan memahami pengalaman pelanggan</p>
 
+                <div class="box-laporan mt-3">
+                    <h3 class="title mb-1">Layanan</h3>
+                    <div class="list-layanan" id="listLayanan">
 
+                    </div>
+                    <table class="table mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nama</th>
+                            <th scope="col" class="text-center">Pemakaian</th>
+                        </tr>
+                        </thead>
+                        <tbody id="">
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="box-laporan mt-4">
+                    <h3 class="title mb-1">Parfum</h3>
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nama</th>
+                                <th scope="col" class="text-center">Pemakaian</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listParfum">
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="box-laporan mt-4">
+                    <h3 class="title mb-1">Diskon</h3>
+                    <table class="table mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nama</th>
+                            <th scope="col" class="text-center">Pemakaian</th>
+                        </tr>
+                        </thead>
+                        <tbody id="listDiskon">
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="box-laporan mt-4 mb-3">
+                    <h3 class="title mb-1">Pembayaran</h3>
+                    <table class="table mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nama</th>
+                            <th scope="col" class="text-center">Pemakaian</th>
+                        </tr>
+                        </thead>
+                        <tbody id="listPembayaran">
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -221,6 +325,113 @@
 @include('javascript')
 
 @include('menu')
+
+<script>
+    ops_transaksi();
+    ops_parfum();
+    ops_diskon();
+    ops_pembayaran();
+    ops_layanan();
+
+    function ops_transaksi() {
+        $.ajax({
+            url: '{{ route('ops_transaksi') }}',
+            method: 'GET',
+            success: function (params) {
+                document.getElementById('transaksi-selesai').innerText = params.data.selesai;
+                document.getElementById('transaksi-batal').innerText = params.data.dibatalkan;
+            }
+        });
+    }
+
+    function ops_layanan() {
+        $.ajax({
+            url: '{{ route('ops_layanan') }}',
+            method: 'GET',
+            success: function (params) {
+                let dataLayanan = params.data;
+                let html = '';
+
+                dataLayanan.forEach(function (layanan) {
+                    html += `
+                        <a class="box-layanan">
+                            <p class="layanan-menu">${layanan.nama}</p>
+                            <p class="layanan-jumlah">${layanan.jumlah}</p>
+                        </a>
+                    `;
+                });
+
+                document.getElementById('listLayanan').innerHTML = html;
+            }
+        });
+    }
+
+    function ops_parfum() {
+        $.ajax({
+            url: '{{ route('ops_parfum') }}',
+            method: 'GET',
+            success: function (params) {
+                let dataParfum = params.data;
+                let html = '';
+
+                dataParfum.forEach(function (parfum) {
+                    html += `
+                        <tr>
+                            <td>${parfum.nama}</td>
+                            <td class="text-center">${parfum.jumlah}</td>
+                        </tr>
+                    `;
+                });
+
+                document.getElementById('listParfum').innerHTML = html;
+            }
+        });
+    }
+
+    function ops_diskon() {
+        $.ajax({
+            url: '{{ route('ops_diskon') }}',
+            method: 'GET',
+            success: function (params) {
+                let dataDiskon = params.data;
+                let html = '';
+
+                dataDiskon.forEach(function (diskon) {
+                    html += `
+                        <tr>
+                            <td>${diskon.nama}</td>
+                            <td class="text-center">${diskon.jumlah}</td>
+                        </tr>
+                    `;
+                });
+
+                document.getElementById('listDiskon').innerHTML = html;
+            }
+        });
+    }
+
+    function ops_pembayaran() {
+        $.ajax({
+            url: '{{ route('ops_pembayaran') }}',
+            method: 'GET',
+            success: function (params) {
+                let dataPembayaran = params.data;
+                let html = '';
+
+                dataPembayaran.forEach(function (pembayaran) {
+                    html += `
+                        <tr>
+                            <td>${pembayaran.nama}</td>
+                            <td class="text-center">${pembayaran.jumlah}</td>
+                        </tr>
+                    `;
+                });
+
+                document.getElementById('listPembayaran').innerHTML = html;
+            }
+        });
+    }
+</script>
 
 </body>
 </html>

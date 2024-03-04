@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class LaporanController extends Controller
@@ -10,5 +11,55 @@ class LaporanController extends Controller
     public function index(): View
     {
         return view('laporan.index');
+    }
+
+    public function ops_transaksi(): \Illuminate\Http\JsonResponse
+    {
+        $dataTransaksi = $this->hitApiService->GET('api/laporan/transaksi-hari-ini/'.Session::get('toko')->id, []);
+        $transaksi = $dataTransaksi->data ?? [];
+
+        return response()->json([
+            'data'  => $transaksi
+        ]);
+    }
+
+    public function ops_layanan(): \Illuminate\Http\JsonResponse
+    {
+        $dataLayanan = $this->hitApiService->GET('api/laporan/layanan/'.Session::get('toko')->id, []);
+        $layanan = $dataLayanan->data ?? [];
+
+        return response()->json([
+            'data'  => $layanan
+        ]);
+    }
+
+    public function ops_diskon(): \Illuminate\Http\JsonResponse
+    {
+        $dataTransaksi = $this->hitApiService->GET('api/laporan/diskon/'.Session::get('toko')->id, []);
+        $transaksi = $dataTransaksi->data ?? [];
+
+        return response()->json([
+            'data'  => $transaksi
+        ]);
+    }
+
+    public function ops_parfum(): \Illuminate\Http\JsonResponse
+    {
+        $dataTransaksi = $this->hitApiService->GET('api/laporan/parfum/'.Session::get('toko')->id, []);
+        $transaksi = $dataTransaksi->data ?? [];
+
+        return response()->json([
+            'data'  => $transaksi
+        ]);
+    }
+
+    public function ops_pembayaran(): \Illuminate\Http\JsonResponse
+    {
+        $dataTransaksi = $this->hitApiService->GET('api/laporan/pembayaran/'.Session::get('toko')->id, []);
+        $transaksi = $dataTransaksi->data ?? [];
+
+        return response()->json([
+            'data'  => $transaksi
+        ]);
     }
 }
