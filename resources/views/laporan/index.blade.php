@@ -365,27 +365,27 @@
         });
     }
 
-    {{--function ops_parfum() {--}}
-    {{--    $.ajax({--}}
-    {{--        url: '{{ route('ops_parfum') }}',--}}
-    {{--        method: 'GET',--}}
-    {{--        success: function (params) {--}}
-    {{--            let dataParfum = params.data;--}}
-    {{--            let html = '';--}}
+    function ops_parfum() {
+        $.ajax({
+            url: '{{ route('ops_parfum') }}',
+            method: 'GET',
+            success: function (params) {
+                let dataParfum = params.data;
+                let html = '';
 
-    {{--            dataParfum.forEach(function (parfum) {--}}
-    {{--                html += `--}}
-    {{--                    <tr>--}}
-    {{--                        <td>${parfum.nama}</td>--}}
-    {{--                        <td class="text-center">${parfum.jumlah}</td>--}}
-    {{--                    </tr>--}}
-    {{--                `;--}}
-    {{--            });--}}
+                dataParfum.forEach(function (parfum) {
+                    html += `
+                        <tr>
+                            <td>${parfum.nama}</td>
+                            <td class="text-center">${parfum.jumlah}</td>
+                        </tr>
+                    `;
+                });
 
-    {{--            document.getElementById('listParfum').innerHTML = html;--}}
-    {{--        }--}}
-    {{--    });--}}
-    {{--}--}}
+                document.getElementById('listParfum').innerHTML = html;
+            }
+        });
+    }
 
     {{--function ops_diskon() {--}}
     {{--    $.ajax({--}}
