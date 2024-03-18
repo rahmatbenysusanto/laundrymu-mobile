@@ -238,7 +238,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="{{ route('outlet') }}" style="text-decoration: none">
+                            <a href="{{ route('absensiPegawai') }}" style="text-decoration: none">
                                 <div class="d-flex align-items-center" style="margin-bottom: 24px">
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">

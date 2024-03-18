@@ -38,14 +38,20 @@ class PegawaiController extends Controller
 
     public function absensiPegawai(): View
     {
-        $dataPegawai = $this->hitApiService->GET('api/pegawai/toko/'.Session::get('toko')->id, []);
-        $pegawai = $dataPegawai->data ?? [];
-
         $dataAbsenPegawai = $this->hitApiService->GET('api/data-absen-pegawai/'.Session::get('toko')->id, []);
         $absenPegawai = $dataAbsenPegawai->data ?? [];
 
         $title = "absensi pegawai";
-        return view('pegawai.absensi', compact('title', 'pegawai', 'absenPegawai'));
+        return view('pegawai.absen.index', compact('title', 'absenPegawai'));
+    }
+
+    public function tambahAbsensi(): View
+    {
+        $dataPegawai = $this->hitApiService->GET('api/pegawai/toko/'.Session::get('toko')->id, []);
+        $pegawai = $dataPegawai->data ?? [];
+
+        $title = "absensi pegawai";
+        return view('pegawai.absen.tambah', compact('title', 'pegawai'));
     }
 
     public function createAbsenPegawai(Request $request): \Illuminate\Http\RedirectResponse
@@ -73,7 +79,7 @@ class PegawaiController extends Controller
         $absen = $result->data ?? [];
 
         $title = "absensi pegawai";
-        return view('pegawai.detail_absen', compact('title', 'absen'));
+        return view('pegawai.absen.detail', compact('title', 'absen'));
     }
 
     public function gajiPegawai()

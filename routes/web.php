@@ -59,6 +59,7 @@ Route::middleware([CekLogin::class])->group(function () {
         Route::post('/buat-transaksi', 'buatTransaksi')->name('buatTransaksi');
         Route::get('/notifikasi-berhasil', 'notifSuccessCreateTransaksi')->name('notifSuccessCreateTransaksi');
         Route::get('/detail-status-transaksi/{orderNumber}','detailStatusTransaksi');
+        Route::get('/detail-transaksi-by-order-number', 'findTransaksiByOrderNumber')->name('findTransaksiByOrderNumber');
     });
 
     Route::controller(\App\Http\Controllers\OutletController::class)->group(function () {
@@ -117,6 +118,7 @@ Route::middleware([CekLogin::class])->group(function () {
         Route::get('/pegawai', 'index')->name('pegawai');
         Route::post('/tambah-pegawai', 'create')->name('tambahPegawai');
         Route::get('/absensi-pegawai', 'absensiPegawai')->name('absensiPegawai');
+        Route::get('/absensi/tambah-pegawai', 'tambahAbsensi')->name('tambahAbsensi');
         Route::post('/create-absen-pegawai', 'createAbsenPegawai')->name('createAbsenPegawai');
         Route::get('/gaji-pegawai', 'gajiPegawai')->name('gajiPegawai');
         Route::get('/detail-absen-pegawai/{pegawaiId}', 'detailAbsenPegawai');

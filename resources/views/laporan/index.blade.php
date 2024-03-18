@@ -10,7 +10,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>Laundrymu</title>
     <link rel="preconnect" href="mobile/https://fonts.gstatic.com">
-    <link href="mobile/https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
     <link rel="icon" href="{{ asset('mobile/img/core-img/favicon.ico') }}">
     <link rel="apple-touch-icon" href="{{ asset('mobile/img/icons/icon-96x96.png') }}">
     <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('mobile/img/icons/icon-152x152.png') }}">
@@ -366,71 +365,71 @@
         });
     }
 
-    function ops_parfum() {
-        $.ajax({
-            url: '{{ route('ops_parfum') }}',
-            method: 'GET',
-            success: function (params) {
-                let dataParfum = params.data;
-                let html = '';
+    {{--function ops_parfum() {--}}
+    {{--    $.ajax({--}}
+    {{--        url: '{{ route('ops_parfum') }}',--}}
+    {{--        method: 'GET',--}}
+    {{--        success: function (params) {--}}
+    {{--            let dataParfum = params.data;--}}
+    {{--            let html = '';--}}
 
-                dataParfum.forEach(function (parfum) {
-                    html += `
-                        <tr>
-                            <td>${parfum.nama}</td>
-                            <td class="text-center">${parfum.jumlah}</td>
-                        </tr>
-                    `;
-                });
+    {{--            dataParfum.forEach(function (parfum) {--}}
+    {{--                html += `--}}
+    {{--                    <tr>--}}
+    {{--                        <td>${parfum.nama}</td>--}}
+    {{--                        <td class="text-center">${parfum.jumlah}</td>--}}
+    {{--                    </tr>--}}
+    {{--                `;--}}
+    {{--            });--}}
 
-                document.getElementById('listParfum').innerHTML = html;
-            }
-        });
-    }
+    {{--            document.getElementById('listParfum').innerHTML = html;--}}
+    {{--        }--}}
+    {{--    });--}}
+    {{--}--}}
 
-    function ops_diskon() {
-        $.ajax({
-            url: '{{ route('ops_diskon') }}',
-            method: 'GET',
-            success: function (params) {
-                let dataDiskon = params.data;
-                let html = '';
+    {{--function ops_diskon() {--}}
+    {{--    $.ajax({--}}
+    {{--        url: '{{ route('ops_diskon') }}',--}}
+    {{--        method: 'GET',--}}
+    {{--        success: function (params) {--}}
+    {{--            let dataDiskon = params.data;--}}
+    {{--            let html = '';--}}
 
-                dataDiskon.forEach(function (diskon) {
-                    html += `
-                        <tr>
-                            <td>${diskon.nama}</td>
-                            <td class="text-center">${diskon.jumlah}</td>
-                        </tr>
-                    `;
-                });
+    {{--            dataDiskon.forEach(function (diskon) {--}}
+    {{--                html += `--}}
+    {{--                    <tr>--}}
+    {{--                        <td>${diskon.nama}</td>--}}
+    {{--                        <td class="text-center">${diskon.jumlah}</td>--}}
+    {{--                    </tr>--}}
+    {{--                `;--}}
+    {{--            });--}}
 
-                document.getElementById('listDiskon').innerHTML = html;
-            }
-        });
-    }
+    {{--            document.getElementById('listDiskon').innerHTML = html;--}}
+    {{--        }--}}
+    {{--    });--}}
+    {{--}--}}
 
-    function ops_pembayaran() {
-        $.ajax({
-            url: '{{ route('ops_pembayaran') }}',
-            method: 'GET',
-            success: function (params) {
-                let dataPembayaran = params.data;
-                let html = '';
+    {{--function ops_pembayaran() {--}}
+    {{--    $.ajax({--}}
+    {{--        url: '{{ route('ops_pembayaran') }}',--}}
+    {{--        method: 'GET',--}}
+    {{--        success: function (params) {--}}
+    {{--            let dataPembayaran = params.data;--}}
+    {{--            let html = '';--}}
 
-                dataPembayaran.forEach(function (pembayaran) {
-                    html += `
-                        <tr>
-                            <td>${pembayaran.nama}</td>
-                            <td class="text-center">${pembayaran.jumlah}</td>
-                        </tr>
-                    `;
-                });
+    {{--            dataPembayaran.forEach(function (pembayaran) {--}}
+    {{--                html += `--}}
+    {{--                    <tr>--}}
+    {{--                        <td>${pembayaran.nama}</td>--}}
+    {{--                        <td class="text-center">${pembayaran.jumlah}</td>--}}
+    {{--                    </tr>--}}
+    {{--                `;--}}
+    {{--            });--}}
 
-                document.getElementById('listPembayaran').innerHTML = html;
-            }
-        });
-    }
+    {{--            document.getElementById('listPembayaran').innerHTML = html;--}}
+    {{--        }--}}
+    {{--    });--}}
+    {{--}--}}
 </script>
 
 </body>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
 
 class TransaksiController extends Controller
 {
@@ -156,5 +158,27 @@ class TransaksiController extends Controller
         } else {
             return back();
         }
+    }
+
+    public function findTransaksiByOrderNumber(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $dataTransaksi = $this->hitApiService->GET('api/transaksi/'.$request->orderNumber, []);
+        Log::info(json_encode($dataTransaksi->data));
+
+        if (isset($dataTransaksi) && $dataTransaksi->status) {
+            return response()->json([
+               'status' => true,
+               'data'   => $dataTransaksi->data
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+            ]);
+        }
+    }
+
+    public function cetakStrukTransaksi()
+    {
+
     }
 }
