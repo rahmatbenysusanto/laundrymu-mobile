@@ -387,49 +387,49 @@
         });
     }
 
-    {{--function ops_diskon() {--}}
-    {{--    $.ajax({--}}
-    {{--        url: '{{ route('ops_diskon') }}',--}}
-    {{--        method: 'GET',--}}
-    {{--        success: function (params) {--}}
-    {{--            let dataDiskon = params.data;--}}
-    {{--            let html = '';--}}
+    function ops_diskon() {
+        $.ajax({
+            url: '{{ route('ops_diskon') }}',
+            method: 'GET',
+            success: function (params) {
+                let dataDiskon = params.data;
+                let html = '';
 
-    {{--            dataDiskon.forEach(function (diskon) {--}}
-    {{--                html += `--}}
-    {{--                    <tr>--}}
-    {{--                        <td>${diskon.nama}</td>--}}
-    {{--                        <td class="text-center">${diskon.jumlah}</td>--}}
-    {{--                    </tr>--}}
-    {{--                `;--}}
-    {{--            });--}}
+                dataDiskon.forEach(function (diskon) {
+                    html += `
+                        <tr>
+                            <td>${diskon.nama}</td>
+                            <td class="text-center">${diskon.jumlah}</td>
+                        </tr>
+                    `;
+                });
 
-    {{--            document.getElementById('listDiskon').innerHTML = html;--}}
-    {{--        }--}}
-    {{--    });--}}
-    {{--}--}}
+                document.getElementById('listDiskon').innerHTML = html;
+            }
+        });
+    }
 
-    {{--function ops_pembayaran() {--}}
-    {{--    $.ajax({--}}
-    {{--        url: '{{ route('ops_pembayaran') }}',--}}
-    {{--        method: 'GET',--}}
-    {{--        success: function (params) {--}}
-    {{--            let dataPembayaran = params.data;--}}
-    {{--            let html = '';--}}
+    function ops_pembayaran() {
+        $.ajax({
+            url: '{{ route('ops_pembayaran') }}',
+            method: 'GET',
+            success: function (params) {
+                let dataPembayaran = params.data;
+                let html = '';
 
-    {{--            dataPembayaran.forEach(function (pembayaran) {--}}
-    {{--                html += `--}}
-    {{--                    <tr>--}}
-    {{--                        <td>${pembayaran.nama}</td>--}}
-    {{--                        <td class="text-center">${pembayaran.jumlah}</td>--}}
-    {{--                    </tr>--}}
-    {{--                `;--}}
-    {{--            });--}}
+                dataPembayaran.forEach(function (pembayaran) {
+                    html += `
+                        <tr>
+                            <td>${pembayaran.nama}</td>
+                            <td class="text-center">${pembayaran.jumlah}</td>
+                        </tr>
+                    `;
+                });
 
-    {{--            document.getElementById('listPembayaran').innerHTML = html;--}}
-    {{--        }--}}
-    {{--    });--}}
-    {{--}--}}
+                document.getElementById('listPembayaran').innerHTML = html;
+            }
+        });
+    }
 </script>
 
 </body>
