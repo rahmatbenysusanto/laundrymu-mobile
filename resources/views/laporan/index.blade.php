@@ -409,27 +409,27 @@
         });
     }
 
-    function ops_pembayaran() {
-        $.ajax({
-            url: '{{ route('ops_pembayaran') }}',
-            method: 'GET',
-            success: function (params) {
-                let dataPembayaran = params.data;
-                let html = '';
+    {{--function ops_pembayaran() {--}}
+    {{--    $.ajax({--}}
+    {{--        url: '{{ route('ops_pembayaran') }}',--}}
+    {{--        method: 'GET',--}}
+    {{--        success: function (params) {--}}
+    {{--            let dataPembayaran = params.data;--}}
+    {{--            let html = '';--}}
 
-                dataPembayaran.forEach(function (pembayaran) {
-                    html += `
-                        <tr>
-                            <td>${pembayaran.nama}</td>
-                            <td class="text-center">${pembayaran.jumlah}</td>
-                        </tr>
-                    `;
-                });
+    {{--            dataPembayaran.forEach(function (pembayaran) {--}}
+    {{--                html += `--}}
+    {{--                    <tr>--}}
+    {{--                        <td>${pembayaran.nama}</td>--}}
+    {{--                        <td class="text-center">${pembayaran.jumlah}</td>--}}
+    {{--                    </tr>--}}
+    {{--                `;--}}
+    {{--            });--}}
 
-                document.getElementById('listPembayaran').innerHTML = html;
-            }
-        });
-    }
+    {{--            document.getElementById('listPembayaran').innerHTML = html;--}}
+    {{--        }--}}
+    {{--    });--}}
+    {{--}--}}
 </script>
 
 </body>
