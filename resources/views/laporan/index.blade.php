@@ -325,114 +325,114 @@
 
 @include('menu')
 
-<script>
-    ops_layanan();
-    ops_transaksi();
-    ops_parfum();
-    ops_diskon();
-    // ops_pembayaran();
+{{--<script>--}}
+{{--    ops_layanan();--}}
+{{--    ops_transaksi();--}}
+{{--    ops_parfum();--}}
+{{--    ops_diskon();--}}
+{{--    // ops_pembayaran();--}}
 
-    function ops_transaksi() {
-        $.ajax({
-            url: '{{ route('ops_transaksi') }}',
-            method: 'GET',
-            success: function (params) {
-                document.getElementById('transaksi-selesai').innerText = params.data.selesai;
-                document.getElementById('transaksi-batal').innerText = params.data.dibatalkan;
-            }
-        });
-    }
+{{--    function ops_transaksi() {--}}
+{{--        $.ajax({--}}
+{{--            url: '{{ route('ops_transaksi') }}',--}}
+{{--            method: 'GET',--}}
+{{--            success: function (params) {--}}
+{{--                document.getElementById('transaksi-selesai').innerText = params.data.selesai;--}}
+{{--                document.getElementById('transaksi-batal').innerText = params.data.dibatalkan;--}}
+{{--            }--}}
+{{--        });--}}
+{{--    }--}}
 
-    function ops_layanan() {
-        $.ajax({
-            url: '{{ route('ops_layanan') }}',
-            method: 'GET',
-            success: function (params) {
-                console.info(params);
-                let dataLayanan = params.data;
-                let html = '';
+{{--    function ops_layanan() {--}}
+{{--        $.ajax({--}}
+{{--            url: '{{ route('ops_layanan') }}',--}}
+{{--            method: 'GET',--}}
+{{--            success: function (params) {--}}
+{{--                console.info(params);--}}
+{{--                let dataLayanan = params.data;--}}
+{{--                let html = '';--}}
 
-                dataLayanan.forEach(function (layanan) {
-                    html += `
-                        <a class="box-layanan">
-                            <p class="layanan-menu">${layanan.nama}</p>
-                            <p class="layanan-jumlah">${layanan.jumlah}</p>
-                        </a>
-                    `;
-                });
+{{--                dataLayanan.forEach(function (layanan) {--}}
+{{--                    html += `--}}
+{{--                        <a class="box-layanan">--}}
+{{--                            <p class="layanan-menu">${layanan.nama}</p>--}}
+{{--                            <p class="layanan-jumlah">${layanan.jumlah}</p>--}}
+{{--                        </a>--}}
+{{--                    `;--}}
+{{--                });--}}
 
-                document.getElementById('listLayanan').innerHTML = html;
-            }
-        });
-    }
+{{--                document.getElementById('listLayanan').innerHTML = html;--}}
+{{--            }--}}
+{{--        });--}}
+{{--    }--}}
 
-    function ops_parfum() {
-        $.ajax({
-            url: '{{ route('ops_parfum') }}',
-            method: 'GET',
-            success: function (params) {
-                let dataParfum = params.data;
-                let html = '';
+{{--    function ops_parfum() {--}}
+{{--        $.ajax({--}}
+{{--            url: '{{ route('ops_parfum') }}',--}}
+{{--            method: 'GET',--}}
+{{--            success: function (params) {--}}
+{{--                let dataParfum = params.data;--}}
+{{--                let html = '';--}}
 
-                dataParfum.forEach(function (parfum) {
-                    html += `
-                        <tr>
-                            <td>${parfum.nama}</td>
-                            <td class="text-center">${parfum.jumlah}</td>
-                        </tr>
-                    `;
-                });
+{{--                dataParfum.forEach(function (parfum) {--}}
+{{--                    html += `--}}
+{{--                        <tr>--}}
+{{--                            <td>${parfum.nama}</td>--}}
+{{--                            <td class="text-center">${parfum.jumlah}</td>--}}
+{{--                        </tr>--}}
+{{--                    `;--}}
+{{--                });--}}
 
-                document.getElementById('listParfum').innerHTML = html;
-            }
-        });
-    }
+{{--                document.getElementById('listParfum').innerHTML = html;--}}
+{{--            }--}}
+{{--        });--}}
+{{--    }--}}
 
-    function ops_diskon() {
-        $.ajax({
-            url: '{{ route('ops_diskon') }}',
-            method: 'GET',
-            success: function (params) {
-                let dataDiskon = params.data;
-                let html = '';
+{{--    function ops_diskon() {--}}
+{{--        $.ajax({--}}
+{{--            url: '{{ route('ops_diskon') }}',--}}
+{{--            method: 'GET',--}}
+{{--            success: function (params) {--}}
+{{--                let dataDiskon = params.data;--}}
+{{--                let html = '';--}}
 
-                dataDiskon.forEach(function (diskon) {
-                    html += `
-                        <tr>
-                            <td>${diskon.nama}</td>
-                            <td class="text-center">${diskon.jumlah}</td>
-                        </tr>
-                    `;
-                });
+{{--                dataDiskon.forEach(function (diskon) {--}}
+{{--                    html += `--}}
+{{--                        <tr>--}}
+{{--                            <td>${diskon.nama}</td>--}}
+{{--                            <td class="text-center">${diskon.jumlah}</td>--}}
+{{--                        </tr>--}}
+{{--                    `;--}}
+{{--                });--}}
 
-                document.getElementById('listDiskon').innerHTML = html;
-            }
-        });
-    }
+{{--                document.getElementById('listDiskon').innerHTML = html;--}}
+{{--            }--}}
+{{--        });--}}
+{{--    }--}}
 
-    {{--function ops_pembayaran() {--}}
-    {{--    $.ajax({--}}
-    {{--        url: '{{ route('ops_pembayaran') }}',--}}
-    {{--        method: 'GET',--}}
-    {{--        delay: 2000,--}}
-    {{--        success: function (params) {--}}
-    {{--            let dataPembayaran = params.data;--}}
-    {{--            let html = '';--}}
+{{--    --}}{{--function ops_pembayaran() {--}}
+{{--    --}}{{--    $.ajax({--}}
+{{--    --}}{{--        url: '{{ route('ops_pembayaran') }}',--}}
+{{--    --}}{{--        method: 'GET',--}}
+{{--    --}}{{--        delay: 2000,--}}
+{{--    --}}{{--        success: function (params) {--}}
+{{--    --}}{{--            let dataPembayaran = params.data;--}}
+{{--    --}}{{--            let html = '';--}}
 
-    {{--            dataPembayaran.forEach(function (pembayaran) {--}}
-    {{--                html += `--}}
-    {{--                    <tr>--}}
-    {{--                        <td>${pembayaran.nama}</td>--}}
-    {{--                        <td class="text-center">${pembayaran.jumlah}</td>--}}
-    {{--                    </tr>--}}
-    {{--                `;--}}
-    {{--            });--}}
+{{--    --}}{{--            dataPembayaran.forEach(function (pembayaran) {--}}
+{{--    --}}{{--                html += `--}}
+{{--    --}}{{--                    <tr>--}}
+{{--    --}}{{--                        <td>${pembayaran.nama}</td>--}}
+{{--    --}}{{--                        <td class="text-center">${pembayaran.jumlah}</td>--}}
+{{--    --}}{{--                    </tr>--}}
+{{--    --}}{{--                `;--}}
+{{--    --}}{{--            });--}}
 
-    {{--            document.getElementById('listPembayaran').innerHTML = html;--}}
-    {{--        }--}}
-    {{--    });--}}
-    {{--}--}}
-</script>
+{{--    --}}{{--            document.getElementById('listPembayaran').innerHTML = html;--}}
+{{--    --}}{{--        }--}}
+{{--    --}}{{--    });--}}
+{{--    --}}{{--}--}}
+{{--</script>--}}
 
 </body>
 </html>
