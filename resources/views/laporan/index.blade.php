@@ -326,11 +326,11 @@
 @include('menu')
 
 <script>
+    ops_layanan();
     ops_transaksi();
     ops_parfum();
     ops_diskon();
-    ops_pembayaran();
-    ops_layanan();
+    // ops_pembayaran();
 
     function ops_transaksi() {
         $.ajax({
@@ -347,7 +347,6 @@
         $.ajax({
             url: '{{ route('ops_layanan') }}',
             method: 'GET',
-            delay: 1500,
             success: function (params) {
                 console.info(params);
                 let dataLayanan = params.data;
