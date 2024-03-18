@@ -347,7 +347,9 @@
         $.ajax({
             url: '{{ route('ops_layanan') }}',
             method: 'GET',
+            delay: 1500,
             success: function (params) {
+                console.info(params);
                 let dataLayanan = params.data;
                 let html = '';
 
@@ -409,28 +411,28 @@
         });
     }
 
-    function ops_pembayaran() {
-        $.ajax({
-            url: '{{ route('ops_pembayaran') }}',
-            method: 'GET',
-            delay: 2000,
-            success: function (params) {
-                let dataPembayaran = params.data;
-                let html = '';
+    {{--function ops_pembayaran() {--}}
+    {{--    $.ajax({--}}
+    {{--        url: '{{ route('ops_pembayaran') }}',--}}
+    {{--        method: 'GET',--}}
+    {{--        delay: 2000,--}}
+    {{--        success: function (params) {--}}
+    {{--            let dataPembayaran = params.data;--}}
+    {{--            let html = '';--}}
 
-                dataPembayaran.forEach(function (pembayaran) {
-                    html += `
-                        <tr>
-                            <td>${pembayaran.nama}</td>
-                            <td class="text-center">${pembayaran.jumlah}</td>
-                        </tr>
-                    `;
-                });
+    {{--            dataPembayaran.forEach(function (pembayaran) {--}}
+    {{--                html += `--}}
+    {{--                    <tr>--}}
+    {{--                        <td>${pembayaran.nama}</td>--}}
+    {{--                        <td class="text-center">${pembayaran.jumlah}</td>--}}
+    {{--                    </tr>--}}
+    {{--                `;--}}
+    {{--            });--}}
 
-                document.getElementById('listPembayaran').innerHTML = html;
-            }
-        });
-    }
+    {{--            document.getElementById('listPembayaran').innerHTML = html;--}}
+    {{--        }--}}
+    {{--    });--}}
+    {{--}--}}
 </script>
 
 </body>
