@@ -12,8 +12,7 @@
 <script src="{{ asset('mobile/js/pwa.js') }}"></script>
 <script src="https://app.laundrymu.id/assets/libs/sweetalert2/sweetalert2.min.js"></script>
 <script src="https://app.laundrymu.id/assets/js/pages/sweetalerts.init.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{ asset('mobile/js/jquery.js') }}"></script>
 
 @if($alert = Session::get('success'))
     <script>

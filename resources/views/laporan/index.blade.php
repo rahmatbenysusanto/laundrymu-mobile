@@ -332,112 +332,109 @@
     ops_diskon();
     ops_pembayaran();
 
-    function ops_transaksi() {
-        $.ajax({
-            url: '{{ route('ops_transaksi') }}',
-            method: 'GET',
-            success: function (params) {
-                document.getElementById('transaksi-selesai').innerText = params.data.selesai;
-                document.getElementById('transaksi-batal').innerText = params.data.dibatalkan;
-            }
-        });
+    async function ops_transaksi() {
+        try {
+             const getData = await fetch("{{ route('ops_transaksi') }}");
+             const response = await getData.json();
+
+            document.getElementById('transaksi-selesai').innerText = response.data.selesai;
+            document.getElementById('transaksi-batal').innerText = response.data.dibatalkan;
+        } catch (e) {
+            document.getElementById('transaksi-selesai').innerText = '-';
+            document.getElementById('transaksi-batal').innerText = '-';
+        }
     }
 
-    function ops_layanan() {
-        $.ajax({
-            url: '{{ route('ops_layanan') }}',
-            method: 'GET',
-            success: function (params) {
-                console.info(params);
-                let dataLayanan = params.data;
-                let html = '';
+    async function ops_layanan() {
+        try {
+            const getData = await fetch("{{ route('ops_layanan') }}");
+            const response = await getData.json();
 
-                dataLayanan.forEach(function (layanan) {
-                    html += `
+            let dataLayanan = response.data;
+            let html = '';
+
+            dataLayanan.forEach(function (layanan) {
+                html += `
                         <a class="box-layanan">
                             <p class="layanan-menu">${layanan.nama}</p>
                             <p class="layanan-jumlah">${layanan.jumlah}</p>
                         </a>
                     `;
-                });
+            });
 
-                document.getElementById('listLayanan').innerHTML = html;
-            }
-        });
+            document.getElementById('listLayanan').innerHTML = html;
+        } catch (e) {
+            document.getElementById('listLayanan').innerHTML = '';
+        }
     }
 
-    function ops_parfum() {
-        $.ajax({
-            url: '{{ route('ops_parfum') }}',
-            method: 'GET',
-            success: function (params) {
-                let dataParfum = params.data;
-                let html = '';
+    async function ops_parfum() {
+        try {
+            const getData = await fetch("{{ route('ops_parfum') }}");
+            const response = await getData.json();
 
-                dataParfum.forEach(function (parfum) {
-                    html += `
+            let dataParfum = response.data;
+            let html = '';
+
+            dataParfum.forEach(function (parfum) {
+                html += `
                         <tr>
                             <td>${parfum.nama}</td>
                             <td class="text-center">${parfum.jumlah}</td>
                         </tr>
                     `;
-                });
+            });
 
-                document.getElementById('listParfum').innerHTML = html;
-            }
-        });
+            document.getElementById('listParfum').innerHTML = html;
+        } catch (e) {
+            document.getElementById('listParfum').innerHTML = '';
+        }
     }
 
-    function ops_diskon() {
-        $.ajax({
-            url: '{{ route('ops_diskon') }}',
-            method: 'GET',
-            success: function (params) {
-                let dataDiskon = params.data;
-                let html = '';
+    async function ops_diskon() {
+        try {
+            const getData = await fetch("{{ route('ops_diskon') }}");
+            const response = await getData.json();
 
-                dataDiskon.forEach(function (diskon) {
-                    html += `
+            let dataDiskon = response.data;
+            let html = '';
+
+            dataDiskon.forEach(function (diskon) {
+                html += `
                         <tr>
                             <td>${diskon.nama}</td>
                             <td class="text-center">${diskon.jumlah}</td>
                         </tr>
                     `;
-                });
+            });
 
-                document.getElementById('listDiskon').innerHTML = html;
-            }
-        });
+            document.getElementById('listDiskon').innerHTML = html;
+        } catch (e) {
+            document.getElementById('listDiskon').innerHTML = '';
+        }
     }
 
-    function ops_pembayaran() {
-        $.ajax({
-            url: '{{ route('ops_pembayaran') }}',
-            method: 'GET',
-            timeout: 2000,
-            success: function (params) {
-                let dataPembayaran = params.data;
-                let html = '';
+    async function ops_pembayaran() {
+        try {
+            const getData = await fetch("{{ route('ops_pembayaran') }}");
+            const response = await getData.json();
 
-                dataPembayaran.forEach(function (pembayaran) {
-                    html += `
+            let dataPembayaran = response.data;
+            let html = '';
+
+            dataPembayaran.forEach(function (pembayaran) {
+                html += `
                         <tr>
                             <td>${pembayaran.nama}</td>
                             <td class="text-center">${pembayaran.jumlah}</td>
                         </tr>
                     `;
-                });
+            });
 
-                document.getElementById('listPembayaran').innerHTML = html;
-            },
-            error: function(xmlhttprequest, textstatus, message) {
-                if(textstatus === "timeout") {
-                    alert("got timeout");
-                } else {
-                    alert(textstatus);
-                }
-            }
-        });
+            document.getElementById('listPembayaran').innerHTML = html;
+        } catch (e) {
+            document.getElementById('listPembayaran').innerHTML = '';
+        }
     }
 </script>
 
