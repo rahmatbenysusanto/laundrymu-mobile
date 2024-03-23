@@ -18,9 +18,8 @@ class OutletController extends Controller
         return view('lainnya.outlet.daftar_outlet', compact('outlet'));
     }
 
-    public function gunakanOutlet(Request $request): \Illuminate\Http\JsonResponse
+    public function gunakanOutlet($outletId): \Illuminate\Http\JsonResponse
     {
-        $outletId = $request->id;
         $dataOutlet = $this->hitApiService->GET('api/toko/user/'.Session::get('data_user')->id, []);
 
         foreach ($dataOutlet->data as $outlet) {

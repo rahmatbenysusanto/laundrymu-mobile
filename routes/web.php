@@ -64,7 +64,7 @@ Route::middleware([CekLogin::class])->group(function () {
 
     Route::controller(\App\Http\Controllers\OutletController::class)->group(function () {
         Route::get('/outlet', 'outlet')->name('outlet');
-        Route::get('/gunakan-outlet', 'gunakanOutlet')->name('gunakanOutlet');
+        Route::get('/gunakan-outlet/{id}', 'gunakanOutlet')->name('gunakanOutlet');
         Route::get('/lihat-outlet/{id}', 'lihatOutlet');
         Route::get('/perpanjang-lisensi-outlet/{id}', 'perpanjangLisensi');
         Route::get('/tambah-outlet', 'tambahOutlet')->name('tambahOutlet');

@@ -245,15 +245,13 @@
             confirmButtonClass:"btn btn-primary w-xs me-2 mt-2",
             cancelButtonClass:"btn btn-danger w-xs mt-2",
             buttonsStyling:!1,showCloseButton:!0
-        }).then(function(t) {
+        }).then(async function(t) {
             if (t.value) {
-                $.ajax({
-                    url: '{{ route('gunakanOutlet') }}',
-                    method: 'GET',
-                    data: {
-                        id: id
-                    },
-                    success: function (res) {
+                try {
+                    const useOutlet = await fetch(`/gunakan-outlet/${id}`);
+                    const response = await useOutlet.json();
+
+                    if (response.status) {
                         Swal.fire({
                             html:'<div class="mt-3">' +
                                 '<lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon>' +
@@ -270,7 +268,9 @@
                             location.replace('');
                         });
                     }
-                });
+                } catch (e) {
+
+                }
             }
         });
     }

@@ -91,17 +91,17 @@
 <script>
     getChat();
 
-    function getChat() {
-        $.ajax({
-            url: '{{ route('getChat') }}',
-            method: 'GET',
-            success: function (res) {
-                let chat = res.data;
-                let html = '';
+    async function getChat() {
+        try {
+            const getChat = await fetch('{{ route('getChat') }}');
+            const response = await getChat.json();
 
-                chat.forEach(function (params) {
-                    if (params.role === "admin") {
-                        html += `
+            let chat = response.data;
+            let html = '';
+
+            chat.forEach(function (params) {
+                if (params.role === "admin") {
+                    html += `
                             <div class="single-chat-item">
                                 <div class="user-message">
                                     <div class="message-content">
@@ -112,8 +112,8 @@
                                 </div>
                             </div>
                         `;
-                    } else {
-                        html += `
+                } else {
+                    html += `
                             <div class="single-chat-item outgoing">
                                 <div class="user-message">
                                     <div class="message-content">
@@ -124,27 +124,34 @@
                                 </div>
                             </div>
                     `;
-                    }
-                });
+                }
+            });
 
-                document.getElementById('listChat').innerHTML = html;
-            }
-        });
+            document.getElementById('listChat').innerHTML = html;
+        } catch (e) {
+
+        }
     }
 
-    function sendChat() {
-        $.ajax({
-            url: '{{ route('sendChat') }}',
-            method: 'POST',
-            data: {
-                _token: '{{ @csrf_token() }}',
-                chat: document.getElementById('pesan').value
-            },
-            success: function (res) {
-                document.getElementById('pesan').value = "";
-                getChat();
-            }
-        });
+    async function sendChat() {
+        try {
+            const sendChat = await fetch('{{ route('sendChat') }}', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    _token: '{{ @csrf_token() }}',
+                    chat: document.getElementById('pesan').value
+                })
+            });
+            const response = await sendChat.json();
+
+            document.getElementById('pesan').value = "";
+            await getChat();
+        } catch (e) {
+
+        }
     }
 </script>
 
