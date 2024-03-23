@@ -35,6 +35,9 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware([CekLogin::class])->group(function () {
     Route::controller(\App\Http\Controllers\DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
+        Route::get('/dashboard/get-data-status-laundry', 'statusLaundry')->name('statusLaundry');
+        Route::get('/dashboard/transaksi-harian', 'transaksiHarian')->name('transaksiHarian');
+        Route::get('/dashboard/chart-mobile', 'getChart')->name('getChart');
     });
 
     Route::controller(\App\Http\Controllers\LainnyaController::class)->group(function () {

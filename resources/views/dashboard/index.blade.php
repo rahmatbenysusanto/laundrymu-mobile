@@ -82,25 +82,25 @@
                 <div class="col-6">
                     <div class="card-ringkasan">
                         <p class="card-ringkasan-title">Laundry Baru</p>
-                        <p class="card-ringkasan-jumlah">{{ $statusTransaksi->baru }}</p>
+                        <p class="card-ringkasan-jumlah" id="baru">0</p>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="card-ringkasan">
                         <p class="card-ringkasan-title">Laundry Diproses</p>
-                        <p class="card-ringkasan-jumlah">{{ $statusTransaksi->diproses }}</p>
+                        <p class="card-ringkasan-jumlah" id="proses">0</p>
                     </div>
                 </div>
                 <div class="col-6 mt-3">
                     <div class="card-ringkasan">
                         <p class="card-ringkasan-title">Laundry Selesai</p>
-                        <p class="card-ringkasan-jumlah">{{ $statusTransaksi->selesai }}</p>
+                        <p class="card-ringkasan-jumlah" id="selesai">0</p>
                     </div>
                 </div>
                 <div class="col-6 mt-3">
                     <div class="card-ringkasan">
                         <p class="card-ringkasan-title">Laundry Diambil</p>
-                        <p class="card-ringkasan-jumlah">{{ $statusTransaksi->baru }}</p>
+                        <p class="card-ringkasan-jumlah" id="diambil"></p>
                     </div>
                 </div>
             </div>
@@ -115,13 +115,13 @@
                 <div class="col-6">
                     <div class="card-ringkasan">
                         <p class="card-ringkasan-title">Transaksi</p>
-                        <p class="card-ringkasan-jumlah">0</p>
+                        <p class="card-ringkasan-jumlah" id="transaksi">0</p>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="card-ringkasan">
                         <p class="card-ringkasan-title">Pendapatan</p>
-                        <p class="card-ringkasan-jumlah">Rp. 0</p>
+                        <p class="card-ringkasan-jumlah" id="pendapatan">Rp. 0</p>
                     </div>
                 </div>
             </div>
@@ -137,10 +137,164 @@
 
 @include('javascript')
 <script src="{{ asset('mobile/js/apexcharts.min.js') }}"></script>
-<script src="{{ asset('mobile/js/chart-active.js') }}"></script>
 
 <script>
     localStorage.setItem('dt', JSON.stringify('{{ base64_encode(Session::get('data_user')->id) }}'))
+
+    statusTransaksi();
+    transaksiHarian();
+    chart();
+
+    async function statusTransaksi() {
+        try {
+            const getData = await fetch('{{ route('statusLaundry') }}');
+            const response = await getData.json();
+
+            document.getElementById('baru').innerText = response.status.baru;
+            document.getElementById('proses').innerText = response.status.diproses;
+            document.getElementById('selesai').innerText = response.status.selesai;
+            document.getElementById('diambil').innerText = response.diambil
+        } catch (e) {
+            document.getElementById('baru').innerText = '0';
+            document.getElementById('proses').innerText = '0';
+            document.getElementById('selesai').innerText = '0';
+            document.getElementById('diambil').innerText = '0';
+        }
+    }
+
+    async function transaksiHarian() {
+        try {
+            const getData = await fetch('{{ route('transaksiHarian') }}');
+            const response = await getData.json();
+
+            document.getElementById('transaksi').innerText = response.data.jumlah;
+            document.getElementById('pendapatan').innerText = new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR"}).format(response.data.nominal);
+        } catch (e) {
+
+        }
+    }
+
+    async function chart() {
+        try {
+            const getData = await fetch('{{ route('getChart') }}');
+            const response = await getData.json();
+
+            var columnChart2 = {
+                chart: {
+                    height: 240,
+                    type: 'bar',
+                    animations: {
+                        enabled: true,
+                        easing: 'easeinout',
+                        speed: 1000
+                    },
+                    dropShadow: {
+                        enabled: true,
+                        opacity: 0.1,
+                        blur: 2,
+                        left: -1,
+                        top: 5
+                    },
+                    zoom: {
+                        enabled: false
+                    },
+                    toolbar: {
+                        show: false
+                    },
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '40%',
+                        endingShape: 'rounded'
+                    },
+                },
+                colors: ['#00A3FF'],
+                dataLabels: {
+                    enabled: false
+                },
+                grid: {
+                    borderColor: '#dbeaea',
+                    strokeDashArray: 4,
+                    xaxis: {
+                        lines: {
+                            show: true
+                        }
+                    },
+                    yaxis: {
+                        lines: {
+                            show: false,
+                        }
+                    },
+                    padding: {
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        left: 0
+                    },
+                },
+                tooltip: {
+                    theme: 'light',
+                    marker: {
+                        show: true,
+                    },
+                    x: {
+                        show: false,
+                    }
+                },
+                stroke: {
+                    show: true,
+                    colors: ['transparent'],
+                    width: 3
+                },
+                labels: [
+                    '{{ date('d M', strtotime('-7 day')) }}',
+                    '{{ date('d M', strtotime('-6 day')) }}',
+                    '{{ date('d M', strtotime('-5 day')) }}',
+                    '{{ date('d M', strtotime('-4 day')) }}',
+                    '{{ date('d M', strtotime('-3 day')) }}',
+                    '{{ date('d M', strtotime('-2 day')) }}',
+                    '{{ date('d M', strtotime('-1 day')) }}',
+                ],
+                series: [{
+                    name: 'Transaksi',
+                    data: response.data
+                }],
+                xaxis: {
+                    crosshairs: {
+                        show: true
+                    },
+                    labels: {
+                        offsetX: 0,
+                        offsetY: 0,
+                        style: {
+                            colors: '#8380ae',
+                            fontSize: '12px'
+                        },
+                    },
+                    tooltip: {
+                        enabled: false,
+                    },
+                },
+                yaxis: {
+                    labels: {
+                        offsetX: -10,
+                        offsetY: 0,
+                        style: {
+                            colors: '#8380ae',
+                            fontSize: '12px'
+                        },
+                    }
+                },
+            }
+
+            var columnChart_02 = new ApexCharts(document.querySelector("#columnChart2"), columnChart2);
+            columnChart_02.render();
+
+        } catch (e) {
+
+        }
+    }
 </script>
 
 </body>

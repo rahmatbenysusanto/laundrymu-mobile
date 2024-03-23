@@ -240,12 +240,14 @@
             confirmButtonClass:"btn btn-primary w-xs me-2 mt-2",
             cancelButtonClass:"btn btn-danger w-xs mt-2",
             buttonsStyling:!1,showCloseButton:!0
-        }).then(function(t) {
-            if (t.value) {
-                $.ajax({
-                    url: '{{ route('createOutlet') }}',
+        }).then(async function(t) {
+            try {
+                const createOutlet = await fetch('{{ route('createOutlet') }}', {
                     method: 'POST',
-                    data: {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
                         _token: '{{ @csrf_token() }}',
                         nama: document.getElementById('nama').value,
                         no_hp: document.getElementById('no_hp').value,
@@ -260,42 +262,58 @@
                         metodePembayaran: JSON.parse(localStorage.getItem('metodePembayaran')),
                         harga: JSON.parse(localStorage.getItem('nominalLisensi')),
                         lisensiId: JSON.parse(localStorage.getItem('lisensiId')),
-                    },
-                    success: function (params) {
-                        if (params.status) {
-                            Swal.fire({
-                                html:'<div class="mt-3">' +
-                                    '<lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon>' +
-                                    '<div class="mt-4 pt-2 fs-15">' +
-                                    '<h4>Berhasil !</h4>' +
-                                    '<p class="text-muted mx-4 mb-0">Outlet berhasil dibuat.</p>' +
-                                    '</div>' +
-                                    '</div>',
-                                confirmButtonText:"OK",
-                                confirmButtonClass:"btn btn-primary w-xs me-2 mt-2",
-                                buttonsStyling:!1,
-                                showCloseButton:!0
-                            }).then(function (r) {
-                                location.replace('{{ route('historiPembayaran') }}');
-                            });
-                        } else {
-                            Swal.fire({
-                                html:'<div class="mt-3">' +
-                                    '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>' +
-                                    '<div class="mt-4 pt-2 fs-15">' +
-                                    '<h4>Gagal !</h4>' +
-                                    `<p class="text-muted mx-4 mb-0">Outlet gagal dibuat.</p>` +
-                                    '</div>' +
-                                    '</div>',
-                                showCancelButton:!0,
-                                showConfirmButton:!1,
-                                cancelButtonClass:"btn btn-primary w-xs mb-1",
-                                cancelButtonText:"Kembali",
-                                buttonsStyling:!1,
-                                showCloseButton:!0
-                            });
-                        }
-                    }
+                    })
+                });
+                const response = await createOutlet.json();
+
+                if (response.status) {
+                    Swal.fire({
+                        html:'<div class="mt-3">' +
+                            '<lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon>' +
+                            '<div class="mt-4 pt-2 fs-15">' +
+                            '<h4>Berhasil !</h4>' +
+                            '<p class="text-muted mx-4 mb-0">Outlet berhasil dibuat.</p>' +
+                            '</div>' +
+                            '</div>',
+                        confirmButtonText:"OK",
+                        confirmButtonClass:"btn btn-primary w-xs me-2 mt-2",
+                        buttonsStyling:!1,
+                        showCloseButton:!0
+                    }).then(function (r) {
+                        location.replace('{{ route('historiPembayaran') }}');
+                    });
+                } else {
+                    Swal.fire({
+                        html:'<div class="mt-3">' +
+                            '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>' +
+                            '<div class="mt-4 pt-2 fs-15">' +
+                            '<h4>Gagal !</h4>' +
+                            `<p class="text-muted mx-4 mb-0">Outlet gagal dibuat.</p>` +
+                            '</div>' +
+                            '</div>',
+                        showCancelButton:!0,
+                        showConfirmButton:!1,
+                        cancelButtonClass:"btn btn-primary w-xs mb-1",
+                        cancelButtonText:"Kembali",
+                        buttonsStyling:!1,
+                        showCloseButton:!0
+                    });
+                }
+            } catch (e) {
+                Swal.fire({
+                    html:'<div class="mt-3">' +
+                        '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>' +
+                        '<div class="mt-4 pt-2 fs-15">' +
+                        '<h4>Gagal !</h4>' +
+                        `<p class="text-muted mx-4 mb-0">Outlet gagal dibuat.</p>` +
+                        '</div>' +
+                        '</div>',
+                    showCancelButton:!0,
+                    showConfirmButton:!1,
+                    cancelButtonClass:"btn btn-primary w-xs mb-1",
+                    cancelButtonText:"Kembali",
+                    buttonsStyling:!1,
+                    showCloseButton:!0
                 });
             }
         });
