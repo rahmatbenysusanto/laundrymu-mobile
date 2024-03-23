@@ -330,7 +330,7 @@
     ops_transaksi();
     ops_parfum();
     ops_diskon();
-    ops_pembayaran();
+    // ops_pembayaran();
 
     async function ops_transaksi() {
         try {
