@@ -302,20 +302,20 @@
                     </table>
                 </div>
 
-                <div class="box-laporan mt-4 mb-3">
-                    <h3 class="title mb-1">Pembayaran</h3>
-                    <table class="table mb-0">
-                        <thead>
-                        <tr>
-                            <th scope="col">Nama</th>
-                            <th scope="col" class="text-center">Pemakaian</th>
-                        </tr>
-                        </thead>
-                        <tbody id="listPembayaran">
+{{--                <div class="box-laporan mt-4 mb-3">--}}
+{{--                    <h3 class="title mb-1">Pembayaran</h3>--}}
+{{--                    <table class="table mb-0">--}}
+{{--                        <thead>--}}
+{{--                        <tr>--}}
+{{--                            <th scope="col">Nama</th>--}}
+{{--                            <th scope="col" class="text-center">Pemakaian</th>--}}
+{{--                        </tr>--}}
+{{--                        </thead>--}}
+{{--                        <tbody id="listPembayaran">--}}
 
-                        </tbody>
-                    </table>
-                </div>
+{{--                        </tbody>--}}
+{{--                    </table>--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>
@@ -330,7 +330,7 @@
     ops_transaksi();
     ops_parfum();
     ops_diskon();
-    ops_pembayaran();
+    // ops_pembayaran();
 
     async function ops_transaksi() {
         try {
@@ -414,28 +414,28 @@
         }
     }
 
-    async function ops_pembayaran() {
-        try {
-            const getData = await fetch("{{ route('laporan_ops_pembayaran') }}");
-            const response = await getData.json();
+    {{--async function ops_pembayaran() {--}}
+    {{--    try {--}}
+    {{--        const getData = await fetch("{{ route('laporan_ops_pembayaran') }}");--}}
+    {{--        const response = await getData.json();--}}
 
-            let dataPembayaran = response.data;
-            let html = '';
+    {{--        let dataPembayaran = response.data;--}}
+    {{--        let html = '';--}}
 
-            dataPembayaran.forEach(function (pembayaran) {
-                html += `
-                        <tr>
-                            <td>${pembayaran.nama}</td>
-                            <td class="text-center">${pembayaran.jumlah}</td>
-                        </tr>
-                    `;
-            });
+    {{--        dataPembayaran.forEach(function (pembayaran) {--}}
+    {{--            html += `--}}
+    {{--                    <tr>--}}
+    {{--                        <td>${pembayaran.nama}</td>--}}
+    {{--                        <td class="text-center">${pembayaran.jumlah}</td>--}}
+    {{--                    </tr>--}}
+    {{--                `;--}}
+    {{--        });--}}
 
-            document.getElementById('listPembayaran').innerHTML = html;
-        } catch (e) {
-            document.getElementById('listPembayaran').innerHTML = '';
-        }
-    }
+    {{--        document.getElementById('listPembayaran').innerHTML = html;--}}
+    {{--    } catch (e) {--}}
+    {{--        document.getElementById('listPembayaran').innerHTML = '';--}}
+    {{--    }--}}
+    {{--}--}}
 </script>
 
 </body>
