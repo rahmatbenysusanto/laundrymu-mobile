@@ -141,6 +141,7 @@ Route::middleware([CekLogin::class])->group(function () {
         Route::get('/laporan/ops-parfum', 'ops_parfum')->name('ops_parfum');
         Route::get('/laporan/ops-diskon', 'ops_diskon')->name('ops_diskon');
         Route::get('/laporan/ops-pembayaran', 'ops_pembayaran')->name('ops_pembayaran');
+        Route::get('/laporan/pembayaran', 'laporan_ops_pembayaran')->name('laporan_ops_pembayaran');
     });
 
     Route::controller(\App\Http\Controllers\ChatController::class)->group(function () {

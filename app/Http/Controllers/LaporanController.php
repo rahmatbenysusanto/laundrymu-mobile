@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -51,6 +52,24 @@ class LaporanController extends Controller
         return response()->json([
             'data'  => $transaksi
         ]);
+    }
+
+    public function laporan_ops_pembayaran(): \Illuminate\Http\JsonResponse
+    {
+        $dataTransaksi = $this->hitApiService->GET('api/laporan/pembayaran/'.Session::get('toko')->id, []);
+        $transaksi = $dataTransaksi->data ?? [];
+
+        Log::info(json_encode($transaksi));
+
+        if (isset($transaksi)) {
+            return response()->json([
+                'data'  => $transaksi
+            ]);
+        } else {
+            return response()->json([
+                'data'  => []
+            ]);
+        }
     }
 
     public function ops_pembayaran(): \Illuminate\Http\JsonResponse

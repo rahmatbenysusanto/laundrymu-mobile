@@ -330,7 +330,7 @@
     ops_transaksi();
     ops_parfum();
     ops_diskon();
-    // ops_pembayaran();
+    ops_pembayaran();
 
     async function ops_transaksi() {
         try {
@@ -416,7 +416,7 @@
 
     async function ops_pembayaran() {
         try {
-            const getData = await fetch("{{ route('ops_pembayaran') }}");
+            const getData = await fetch("{{ route('laporan_ops_pembayaran') }}");
             const response = await getData.json();
 
             let dataPembayaran = response.data;

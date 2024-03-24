@@ -105,7 +105,7 @@
                 </div>
             </div>
         </div>
-        <div class="card mt-3">
+        <div class="card mt-3 mb-3">
             <div class="row">
                 <div class="col-6">
                     <h3 class="title-ringkasan">Ringkasan Statistik</h3>
